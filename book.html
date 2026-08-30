@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Book KHUTTZZ | Thornhill</title>
+    <meta name="theme-color" content="#000000" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link rel="icon" href="https://assets.cdn.filesafe.space/0H5B1ELDDHfaywbaci4Z/media/69fc9ca5accdf4f354a7261b.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow+Condensed:wght@600;700&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="noise" aria-hidden="true"></div>
+    <header class="nav">
+      <a class="nav-brand" href="index.html" aria-label="KHUTTZZ home">
+        <img src="https://assets.cdn.filesafe.space/0H5B1ELDDHfaywbaci4Z/media/69fc9ca5accdf4f354a7261b.png" alt="KHUTTZZ" />
+      </a>
+      <nav class="nav-links">
+        <a href="index.html#why">Why</a>
+        <a href="index.html#barbers">Barbers</a>
+        <a href="index.html#work">Work</a>
+        <a href="book.html">Book</a>
+      </nav>
+      <a class="btn btn-book nav-book" href="https://getsquire.com/booking/book/khuttzz-x-outkasts-barbershop-thronhill">Squire</a>
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
+    </header>
+    <div class="mobile-menu" hidden>
+      <a href="index.html">Home</a>
+      <a href="index.html#barbers">Barbers</a>
+      <a href="index.html#work">Work</a>
+      <a href="book.html">Book</a>
+    </div>
+
+    <main data-book>
+      <section class="book-hero">
+        <p class="eyebrow">Lock the chair</p>
+        <h1>Book the cut.</h1>
+        <p>Pick your service, your barber, and a time. We send you to Squire to confirm the seat.</p>
+      </section>
+
+      <section class="book-step">
+        <h2>01 · Service</h2>
+        <div class="choice-list">
+          <button class="choice is-on" type="button" data-group="service" data-value="Haircut">
+            <span><strong>Haircut</strong><small>30–60 min · fades, line-ups, shape</small></span>
+            <em>$25–$50</em>
+          </button>
+          <button class="choice" type="button" data-group="service" data-value="Haircut + Beard">
+            <span><strong>Haircut + Beard</strong><small>The full lineup, towel, extras on request</small></span>
+            <em>$50–$60</em>
+          </button>
+          <button class="choice" type="button" data-group="service" data-value="Student cut">
+            <span><strong>Student</strong><small>Under 18</small></span>
+            <em>$30–$40</em>
+          </button>
+          <button class="choice" type="button" data-group="service" data-value="Beard trim + lineup">
+            <span><strong>Beard + Lineup</strong><small>25 min</small></span>
+            <em>$25</em>
+          </button>
+        </div>
+      </section>
+
+      <section class="book-step">
+        <h2>02 · Barber</h2>
+        <div class="choice-list">
+          <button class="choice is-on" type="button" data-group="barber" data-value="Khai">
+            <span><strong>Khai</strong><small>Founder · detail, fades, line-ups</small></span>
+          </button>
+          <button class="choice" type="button" data-group="barber" data-value="KC">
+            <span><strong>KC</strong><small>Clean shape and finish</small></span>
+          </button>
+          <button class="choice" type="button" data-group="barber" data-value="First available">
+            <span><strong>First up</strong><small>Whoever’s open</small></span>
+          </button>
+        </div>
+      </section>
+
+      <section class="book-step">
+        <h2>03 · Day</h2>
+        <div class="days" data-days></div>
+      </section>
+
+      <section class="book-step">
+        <h2>04 · Time</h2>
+        <div class="times" data-times></div>
+        <div class="summary" data-summary></div>
+      </section>
+    </main>
+
+    <div class="dock">
+      <a class="btn btn-ghost" href="index.html">Back</a>
+      <a class="btn btn-red" data-go href="https://getsquire.com/booking/book/khuttzz-x-outkasts-barbershop-thronhill">Confirm on Squire</a>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
