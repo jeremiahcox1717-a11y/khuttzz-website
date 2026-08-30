@@ -64,23 +64,24 @@
     .bar span { display:block; margin-top:3px; font-family:Oswald,sans-serif; letter-spacing:.1em; text-transform:uppercase; font-size:.68rem; color:#ddd; }
 
     .work {
-      padding:36px 16px 10px;
+      padding:28px 22px 8px;
     }
-    .work h2 { margin-bottom:6px; }
+    .work h2 { margin-bottom:4px; }
     .gallery {
-      display:grid; grid-template-columns:1fr 1fr; gap:16px;
-      padding:12px 16px 48px;
+      display:grid; grid-template-columns:1fr 1fr; gap:12px;
+      padding:8px 22px 56px;
+      max-width:420px;
     }
-    .gallery figure { background:rgba(0,0,0,.28); }
-    .gallery img { height:58vw; max-height:420px; object-fit:cover; }
+    .gallery figure { background:rgba(0,0,0,.22); }
+    .gallery img { height:34vw; max-height:168px; object-fit:cover; }
     .gallery figcaption {
-      padding:8px 10px 10px;
+      padding:6px 8px 8px;
       font-family:Oswald,sans-serif; letter-spacing:.12em; text-transform:uppercase;
-      font-size:.62rem; color:#cfc9c0;
+      font-size:.55rem; color:#cfc9c0;
     }
     @media (min-width:800px) {
-      .gallery { grid-template-columns:repeat(2,1fr); gap:22px; padding:16px 28px 64px; max-width:980px; }
-      .gallery img { height:38vw; max-height:460px; }
+      .gallery { grid-template-columns:repeat(4,1fr); gap:16px; padding:12px 28px 64px; max-width:880px; }
+      .gallery img { height:16vw; max-height:190px; }
     }
 
     .block { padding:28px 16px; background:#000; }
@@ -94,8 +95,8 @@
     .menu em { font-style:normal; font-family:Oswald,sans-serif; letter-spacing:.1em; text-transform:uppercase; font-size:.66rem; color:var(--red); }
 
     .stars { color:var(--gold); letter-spacing:.1em; font-size:1.2rem; }
-    .gbox { margin-top:14px; background:#0a0a0a; padding:20px 14px; text-align:center; }
-    .gbox .score { font-family:"Bebas Neue",sans-serif; font-size:3.6rem; line-height:.8; margin:6px 0; }
+    .gbox { margin-top:16px; background:#0a0a0a; padding:28px 16px; text-align:center; }
+    .gbox .score { font-family:"Bebas Neue",sans-serif; font-size:4.4rem; line-height:.8; margin:8px 0; }
     .gbtn { display:inline-grid; place-items:center; min-height:48px; padding:0 20px; background:#fff; color:#111; font-family:Oswald,sans-serif; letter-spacing:.12em; text-transform:uppercase; }
     .quotes { display:grid; gap:8px; margin-top:14px; }
     @media (min-width:800px) { .quotes { grid-template-columns:1fr 1fr; } }
@@ -103,8 +104,11 @@
     .quotes p { color:#ddd; margin-top:8px; }
     .quotes span { display:block; margin-top:10px; font-family:Oswald,sans-serif; letter-spacing:.1em; text-transform:uppercase; font-size:.64rem; color:var(--mute); }
 
-    .book { background:#070707; border-top:3px solid var(--red); border-bottom:3px solid var(--red); }
-    .frame { width:100%; height:72vh; min-height:520px; border:0; background:#111; }
+    .book { background:#000; border-top:3px solid var(--red); border-bottom:3px solid var(--red); }
+    .book .go {
+      display:grid; place-items:center; margin-top:16px; min-height:56px; max-width:280px;
+      background:var(--red); color:#fff; font-family:Oswald,sans-serif; letter-spacing:.14em; text-transform:uppercase;
+    }
     .hours { background:var(--red); color:#fff; }
     .hours li { display:flex; justify-content:space-between; padding:11px 0; border-bottom:1px solid rgba(255,255,255,.28); list-style:none; font-family:Oswald,sans-serif; letter-spacing:.08em; text-transform:uppercase; }
     .pin { display:block; padding:16px 16px; background:#0a0a0a; }
@@ -121,11 +125,14 @@
     .go { background:var(--red); color:#fff; }
     .ghost { border:1px solid #fff; }
     .gfloat {
-      position:fixed; z-index:40; right:12px; bottom:calc(78px + env(safe-area-inset-bottom));
-      display:flex; align-items:center; gap:8px; background:#fff; color:#111; padding:8px 10px;
+      position:fixed; z-index:40; right:12px; bottom:calc(82px + env(safe-area-inset-bottom));
+      display:flex; align-items:center; gap:12px; background:#fff; color:#111;
+      padding:14px 16px; min-width:168px; box-shadow:0 8px 24px rgba(0,0,0,.45);
     }
-    .gfloat b { display:block; font-family:Oswald,sans-serif; letter-spacing:.08em; text-transform:uppercase; font-size:.68rem; }
-    @media (min-width:860px) { .dock { display:none; } body { padding-bottom:0; } .gfloat { bottom:18px; } }
+    .gfloat .stars { font-size:1.55rem; letter-spacing:.08em; line-height:1; }
+    .gfloat b { display:block; font-family:Oswald,sans-serif; letter-spacing:.08em; text-transform:uppercase; font-size:.95rem; }
+    .gfloat em { display:block; font-style:normal; font-size:.72rem; color:#444; margin-top:2px; }
+    @media (min-width:860px) { .dock { display:none; } body { padding-bottom:0; } .gfloat { bottom:22px; padding:16px 18px; min-width:190px; } }
   </style>
 </head>
 <body>
@@ -150,7 +157,7 @@
       <img class="brand" src="https://litter.catbox.moe/txz7li.png" alt="KHUTTZZ x OutKasts" />
       <nav>
         <a href="#menu">Menu</a>
-        <a href="#book">Book</a>
+        <a href="https://getsquire.com/booking/book/khuttzz-x-outkasts-barbershop-thronhill" target="_blank" rel="noopener">Book</a>
       </nav>
     </header>
 
@@ -192,24 +199,40 @@
         <img src="https://litter.catbox.moe/kpkr1u.jpg" alt="Skin fade" />
         <figcaption>Skin fade</figcaption>
       </figure>
+      <figure>
+        <img src="https://litter.catbox.moe/agkhto.jpg" alt="Curly taper" />
+        <figcaption>Curly taper</figcaption>
+      </figure>
+      <figure>
+        <img src="https://litter.catbox.moe/cfdntt.jpg" alt="Wavy fade" />
+        <figcaption>Wavy fade</figcaption>
+      </figure>
+      <figure>
+        <img src="https://litter.catbox.moe/wn5ahk.jpg" alt="Crop fade" />
+        <figcaption>Crop fade</figcaption>
+      </figure>
+      <figure>
+        <img src="https://litter.catbox.moe/5i8uhi.jpg" alt="OutKasts fade" />
+        <figcaption>Lineup</figcaption>
+      </figure>
     </div>
 
     <section class="block" id="menu">
       <p class="kicker">The menu</p>
       <h2>All the services.</h2>
       <div class="menu">
-        <a href="#book"><span><strong>Haircut</strong><small>Fades, tapers, crops, line-ups.</small></span><em>Book</em></a>
-        <a href="#book"><span><strong>Haircut + Beard</strong><small>Cut, beard, lineup, shave, brows, hot towel on request.</small></span><em>Book</em></a>
-        <a href="#book"><span><strong>Student</strong><small>Under 18.</small></span><em>Book</em></a>
-        <a href="#book"><span><strong>Beard Trim + Lineup</strong><small>Shape and sharpen the lines.</small></span><em>Book</em></a>
-        <a href="#book"><span><strong>Face Shave</strong><small>Clean shave. Hot towel on request.</small></span><em>Book</em></a>
-        <a href="#book"><span><strong>Eyebrow Shaping</strong><small>Clean the brows.</small></span><em>Book</em></a>
-        <a href="#book"><span><strong>Designs</strong><small>Parts, lines, custom work.</small></span><em>Book</em></a>
-        <a href="#book"><span><strong>Hair Wash</strong><small>Wash before or after.</small></span><em>Book</em></a>
-        <a href="#book"><span><strong>Hot Towel</strong><small>On request.</small></span><em>Book</em></a>
-        <a href="#book"><span><strong>Enhancements</strong><small>Extra detail after the cut.</small></span><em>Book</em></a>
-        <a href="#book"><span><strong>Line-up</strong><small>Hairline and edges only.</small></span><em>Book</em></a>
-        <a href="#book"><span><strong>Beard Trim</strong><small>Beard only.</small></span><em>Book</em></a>
+        <a href="https://getsquire.com/booking/book/khuttzz-x-outkasts-barbershop-thronhill" target="_blank" rel="noopener"><span><strong>Haircut</strong><small>Fades, tapers, crops, line-ups.</small></span><em>Book</em></a>
+        <a href="https://getsquire.com/booking/book/khuttzz-x-outkasts-barbershop-thronhill" target="_blank" rel="noopener"><span><strong>Haircut + Beard</strong><small>Cut, beard, lineup, shave, brows, hot towel on request.</small></span><em>Book</em></a>
+        <a href="https://getsquire.com/booking/book/khuttzz-x-outkasts-barbershop-thronhill" target="_blank" rel="noopener"><span><strong>Student</strong><small>Under 18.</small></span><em>Book</em></a>
+        <a href="https://getsquire.com/booking/book/khuttzz-x-outkasts-barbershop-thronhill" target="_blank" rel="noopener"><span><strong>Beard Trim + Lineup</strong><small>Shape and sharpen the lines.</small></span><em>Book</em></a>
+        <a href="https://getsquire.com/booking/book/khuttzz-x-outkasts-barbershop-thronhill" target="_blank" rel="noopener"><span><strong>Face Shave</strong><small>Clean shave. Hot towel on request.</small></span><em>Book</em></a>
+        <a href="https://getsquire.com/booking/book/khuttzz-x-outkasts-barbershop-thronhill" target="_blank" rel="noopener"><span><strong>Eyebrow Shaping</strong><small>Clean the brows.</small></span><em>Book</em></a>
+        <a href="https://getsquire.com/booking/book/khuttzz-x-outkasts-barbershop-thronhill" target="_blank" rel="noopener"><span><strong>Designs</strong><small>Parts, lines, custom work.</small></span><em>Book</em></a>
+        <a href="https://getsquire.com/booking/book/khuttzz-x-outkasts-barbershop-thronhill" target="_blank" rel="noopener"><span><strong>Hair Wash</strong><small>Wash before or after.</small></span><em>Book</em></a>
+        <a href="https://getsquire.com/booking/book/khuttzz-x-outkasts-barbershop-thronhill" target="_blank" rel="noopener"><span><strong>Hot Towel</strong><small>On request.</small></span><em>Book</em></a>
+        <a href="https://getsquire.com/booking/book/khuttzz-x-outkasts-barbershop-thronhill" target="_blank" rel="noopener"><span><strong>Enhancements</strong><small>Extra detail after the cut.</small></span><em>Book</em></a>
+        <a href="https://getsquire.com/booking/book/khuttzz-x-outkasts-barbershop-thronhill" target="_blank" rel="noopener"><span><strong>Line-up</strong><small>Hairline and edges only.</small></span><em>Book</em></a>
+        <a href="https://getsquire.com/booking/book/khuttzz-x-outkasts-barbershop-thronhill" target="_blank" rel="noopener"><span><strong>Beard Trim</strong><small>Beard only.</small></span><em>Book</em></a>
       </div>
     </section>
 
@@ -233,7 +256,7 @@
     <section class="block book" id="book">
       <p class="kicker">Book</p>
       <h2>Lock the chair.</h2>
-      <iframe class="frame" title="Book" src="https://getsquire.com/booking/book/khuttzz-x-outkasts-barbershop-thronhill" loading="lazy"></iframe>
+      <a class="go" href="https://getsquire.com/booking/book/khuttzz-x-outkasts-barbershop-thronhill" target="_blank" rel="noopener">Book on Squire</a>
     </section>
 
     <section class="block hours">
@@ -258,11 +281,11 @@
 
   <a class="gfloat" href="#reviews">
     <span class="stars">★★★★★</span>
-    <span><b>5.0 Google</b></span>
+    <span><b>5.0 Google</b><em>Leave a review</em></span>
   </a>
   <div class="dock">
     <a class="ghost" href="tel:+19057716221">Call</a>
-    <a class="go" href="#book">Book</a>
+    <a class="go" href="https://getsquire.com/booking/book/khuttzz-x-outkasts-barbershop-thronhill" target="_blank" rel="noopener">Book</a>
   </div>
   <script>
     document.querySelectorAll("img,video").forEach(function(el){el.addEventListener("error",function(){el.setAttribute("broken","")})});
