@@ -9,63 +9,86 @@
   <meta name="description" content="KHUTTZZ x OutKasts Barbershop. 505 Hwy 7 Unit B60, Thornhill. Book on Squire." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@500;600&family=Outfit:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Black&family=Oswald:wght@500;600&family=Outfit:wght@400;600&display=swap" rel="stylesheet" />
   <style>
-    :root { --red:#e10600; --ink:#f3eee6; --mute:#9a948b; --gold:#fbbc04; }
+    :root { --red:#ff1a12; --ink:#f4efe6; --mute:#9a948b; --gold:#fbbc04; --purple:#b12cff; }
     * { box-sizing:border-box; margin:0; padding:0; }
     html,body { width:100%; overflow-x:hidden; background:#000; color:var(--ink); }
     body { font-family:Outfit,system-ui,sans-serif; padding-bottom:calc(70px + env(safe-area-inset-bottom)); }
     img,video { display:block; width:100%; }
     a { color:inherit; text-decoration:none; }
-
-    .wall {
-      position:fixed; inset:0; z-index:0;
-      display:grid; grid-template-columns:repeat(2,1fr);
-      filter:grayscale(.15) contrast(1.1) brightness(.38);
-    }
-    .wall video { height:28vh; object-fit:cover; }
-    @media (min-width:700px) {
-      .wall { grid-template-columns:repeat(5,1fr); }
-      .wall video { height:50vh; }
-    }
-    .shade {
-      position:fixed; inset:0; z-index:1; pointer-events:none;
-      background:linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.72) 70%, #000);
-    }
-    .wrap { position:relative; z-index:2; }
+    img[broken],video[broken] { display:none !important; }
 
     .top {
-      position:sticky; top:0; z-index:10;
+      position:fixed; top:0; left:0; right:0; z-index:40;
       display:flex; justify-content:space-between; align-items:center;
-      padding:calc(8px + env(safe-area-inset-top)) 14px 8px;
-      background:rgba(0,0,0,.72);
-      border-bottom:3px solid var(--red);
-      backdrop-filter:blur(12px);
+      padding:calc(8px + env(safe-area-inset-top)) 12px 8px;
+      background:linear-gradient(180deg, rgba(0,0,0,.88), rgba(0,0,0,.35) 70%, transparent);
     }
-    .top b { font-family:"Bebas Neue",sans-serif; letter-spacing:.08em; font-size:1.4rem; }
-    .top b i { font-style:normal; color:var(--red); }
-    .top nav { display:flex; gap:14px; }
-    .top a { font-family:Oswald,sans-serif; letter-spacing:.12em; text-transform:uppercase; font-size:.72rem; }
-
-    .hero { min-height:88svh; display:grid; place-items:end center; padding:0 10px 24px; }
-    .hero img { width:min(100%,720px); }
-    .hero p { text-align:center; font-family:Oswald,sans-serif; letter-spacing:.16em; text-transform:uppercase; font-size:.72rem; color:#ddd; padding-top:10px; }
-
-    .block { padding:28px 12px; }
-    .kicker { font-family:Oswald,sans-serif; letter-spacing:.2em; text-transform:uppercase; color:var(--red); font-size:.72rem; margin-bottom:8px; }
-    h2 { font-family:"Bebas Neue",sans-serif; font-size:clamp(2.4rem,12vw,4.6rem); line-height:.88; font-weight:400; text-transform:uppercase; }
-
-    .cuts {
-      display:grid; grid-template-columns:1fr 1fr; gap:3px;
+    .brand {
+      display:block; height:42px; width:auto; max-width:62vw; object-fit:contain; object-position:left center;
     }
+    .top nav { display:flex; gap:12px; flex:none; }
+    .top nav a {
+      font-family:Oswald,sans-serif; letter-spacing:.12em; text-transform:uppercase; font-size:.68rem;
+    }
+
+    .show {
+      position:relative; height:100svh; background:#000; overflow:hidden;
+    }
+    .show .slide {
+      position:absolute; inset:0; opacity:0; transition:opacity .55s ease;
+    }
+    .show .slide.on { opacity:1; }
+    .show img { width:100%; height:100%; object-fit:cover; filter:contrast(1.08) saturate(1.05); }
+    .show .veil {
+      position:absolute; inset:0; pointer-events:none;
+      background:linear-gradient(180deg, rgba(0,0,0,.25), transparent 28%, rgba(0,0,0,.15) 60%, rgba(0,0,0,.78));
+    }
+    .show .cap {
+      position:absolute; left:12px; right:12px; bottom:92px; z-index:2;
+    }
+    .show .cap em {
+      display:inline-block; font-style:normal; font-family:Oswald,sans-serif;
+      letter-spacing:.18em; text-transform:uppercase; font-size:.62rem;
+      background:var(--red); color:#fff; padding:4px 8px; margin-bottom:8px;
+    }
+    .show h1 {
+      font-family:Anton,sans-serif; font-size:clamp(3.2rem,16vw,7rem);
+      line-height:.82; text-transform:uppercase; text-shadow:0 8px 30px #000;
+    }
+    .dots {
+      position:absolute; left:12px; right:12px; bottom:58px; z-index:2;
+      display:flex; gap:6px;
+    }
+    .dots i {
+      height:3px; flex:1; background:#fff4; display:block;
+    }
+    .dots i.on { background:var(--red); }
+
+    .tape {
+      overflow:hidden; background:var(--red); color:#fff;
+      border-top:2px solid #000; border-bottom:2px solid #000;
+    }
+    .tape p {
+      font-family:Oswald,sans-serif; letter-spacing:.2em; text-transform:uppercase;
+      font-size:.72rem; white-space:nowrap; padding:10px 0;
+      animation:run 18s linear infinite;
+    }
+    @keyframes run { from { transform:translateX(0); } to { transform:translateX(-50%); } }
+
+    .block { padding:28px 12px; background:#000; }
+    .kicker { font-family:Oswald,sans-serif; letter-spacing:.22em; text-transform:uppercase; color:var(--red); font-size:.68rem; margin-bottom:8px; }
+    h2 { font-family:Anton,sans-serif; font-size:clamp(2.6rem,13vw,5rem); line-height:.82; font-weight:400; text-transform:uppercase; }
+
+    .cuts { display:grid; grid-template-columns:1fr 1fr; gap:3px; background:#000; }
     .cuts img { height:46vw; object-fit:cover; }
     .cuts .wide { grid-column:span 2; }
     .cuts .wide img { height:62vw; }
     @media (min-width:800px) {
       .cuts { grid-template-columns:repeat(3,1fr); }
-      .cuts img { height:28vw; }
+      .cuts img, .cuts .wide img { height:28vw; }
       .cuts .wide { grid-column:span 2; }
-      .cuts .wide img { height:28vw; }
     }
 
     .menu { display:grid; gap:3px; margin-top:16px; }
@@ -73,61 +96,47 @@
       display:flex; justify-content:space-between; align-items:flex-start; gap:16px;
       padding:16px 14px; background:#0a0a0a; border-left:4px solid var(--red);
     }
-    .menu strong { font-family:"Bebas Neue",sans-serif; font-size:1.7rem; font-weight:400; letter-spacing:.02em; }
+    .menu strong { font-family:Anton,sans-serif; font-size:1.55rem; font-weight:400; letter-spacing:.02em; }
     .menu small { display:block; color:var(--mute); margin-top:4px; line-height:1.4; }
     .menu em { font-style:normal; font-family:Oswald,sans-serif; letter-spacing:.1em; text-transform:uppercase; font-size:.68rem; color:var(--red); white-space:nowrap; padding-top:6px; }
 
     .team { display:grid; gap:3px; }
     @media (min-width:700px) { .team { grid-template-columns:1fr 1fr; } }
     .team article { background:#0a0a0a; }
-    .team img { height:70vw; object-fit:cover; }
-    @media (min-width:700px) { .team img { height:38vw; } }
+    .team img { height:78vw; object-fit:cover; }
+    @media (min-width:700px) { .team img { height:42vw; } }
     .team div { padding:14px 12px; border-top:4px solid var(--red); }
-    .team h3 { font-family:"Bebas Neue",sans-serif; font-size:2.2rem; font-weight:400; }
+    .team h3 { font-family:Anton,sans-serif; font-size:2.4rem; font-weight:400; }
 
     .stars { color:var(--gold); letter-spacing:.12em; font-size:1.35rem; line-height:1; }
     .stars.lg { font-size:2.6rem; letter-spacing:.16em; }
-
     .gbox {
-      margin-top:16px; background:#0a0a0a; border:1px solid #222;
+      margin-top:16px; background:#0a0a0a; border:1px solid #1c1c1c;
       padding:22px 16px; text-align:center;
     }
-    .gbox .gmark {
-      width:36px; height:36px; margin:0 auto 10px;
-    }
-    .gbox .score {
-      font-family:"Bebas Neue",sans-serif; font-size:4.2rem; line-height:.8; margin:8px 0 4px;
-    }
+    .gbox .gmark { width:36px; height:36px; margin:0 auto 10px; }
+    .gbox .score { font-family:Anton,sans-serif; font-size:4.4rem; line-height:.8; margin:8px 0 4px; }
     .gbox p { color:#bbb; margin:8px 0 16px; }
     .gbtn {
       display:inline-grid; place-items:center; min-height:50px; padding:0 22px;
       background:#fff; color:#111; font-family:Oswald,sans-serif;
       letter-spacing:.12em; text-transform:uppercase;
     }
-    .gbtn.red { background:var(--red); color:#fff; }
-
     .quotes { display:grid; gap:3px; margin-top:14px; }
     @media (min-width:800px) { .quotes { grid-template-columns:1fr 1fr; } }
     .quotes article { background:#0a0a0a; padding:18px 14px; }
     .quotes p { color:#ddd; line-height:1.5; }
     .quotes span { display:block; margin-top:12px; font-family:Oswald,sans-serif; letter-spacing:.1em; text-transform:uppercase; font-size:.68rem; color:var(--mute); }
 
-    .book {
-      background:#070707;
-      border-top:3px solid var(--red);
-      border-bottom:3px solid var(--red);
-    }
-    .frame {
-      width:100%; height:78vh; min-height:560px; border:0;
-      background:#111;
-    }
+    .book { background:#070707; border-top:3px solid var(--red); border-bottom:3px solid var(--red); }
+    .frame { width:100%; height:78vh; min-height:560px; border:0; background:#111; }
 
     .hours { background:var(--red); color:#fff; }
     .hours li { display:flex; justify-content:space-between; padding:12px 0; border-bottom:1px solid rgba(255,255,255,.28); list-style:none; font-family:Oswald,sans-serif; letter-spacing:.08em; text-transform:uppercase; }
 
     .map { height:320px; filter:grayscale(1) invert(.92) contrast(1.15); }
     .map iframe { width:100%; height:100%; border:0; }
-    .pin { padding:16px 12px; background:#0a0a0a; border-bottom:1px solid #222; }
+    .pin { padding:16px 12px; background:#0a0a0a; border-bottom:1px solid #222; display:block; }
     .pin span { display:block; font-family:Oswald,sans-serif; letter-spacing:.16em; text-transform:uppercase; color:var(--red); font-size:.7rem; }
 
     .dock {
@@ -149,7 +158,6 @@
       display:flex; align-items:center; gap:10px;
       background:#fff; color:#111; padding:10px 12px 10px 10px;
       box-shadow:0 10px 30px rgba(0,0,0,.45);
-      border-radius:4px;
     }
     .gfloat svg { width:28px; height:28px; flex:none; }
     .gfloat b { display:block; font-family:Oswald,sans-serif; letter-spacing:.08em; text-transform:uppercase; font-size:.72rem; }
@@ -160,162 +168,185 @@
       .dock { display:none; }
       body { padding-bottom:0; }
       .gfloat { bottom:20px; right:20px; }
+      .brand { height:52px; }
+      .show .cap { bottom:40px; }
+      .dots { bottom:18px; }
     }
   </style>
 </head>
 <body>
-  <div class="wall" aria-hidden="true">
-    <video src="https://litter.catbox.moe/9em876.mp4" muted autoplay loop playsinline></video>
-    <video src="https://litter.catbox.moe/hlfr4b.mp4" muted autoplay loop playsinline></video>
-    <video src="https://litter.catbox.moe/j7twio.mp4" muted autoplay loop playsinline></video>
-    <video src="https://litter.catbox.moe/anuiip.mp4" muted autoplay loop playsinline></video>
-    <video src="https://litter.catbox.moe/nvzjz1.mp4" muted autoplay loop playsinline></video>
-    <video src="https://litter.catbox.moe/aa5t64.mp4" muted autoplay loop playsinline></video>
-    <video src="https://litter.catbox.moe/ft9l0j.mp4" muted autoplay loop playsinline></video>
-    <video src="https://litter.catbox.moe/daixvb.mp4" muted autoplay loop playsinline></video>
-    <video src="https://litter.catbox.moe/ela1mq.mp4" muted autoplay loop playsinline></video>
-    <video src="https://litter.catbox.moe/3n05cr.mp4" muted autoplay loop playsinline></video>
-  </div>
-  <div class="shade"></div>
+  <header class="top">
+    <img class="brand" src="https://litter.catbox.moe/chlb7d.jpg" alt="KHUTTZZ x OutKasts" />
+    <nav>
+      <a href="#menu">Menu</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#book">Book</a>
+    </nav>
+  </header>
 
-  <div class="wrap">
-    <header class="top">
-      <b>KHUTTZZ <i>x</i> OUTKASTS</b>
-      <nav>
-        <a href="#menu">Menu</a>
-        <a href="#reviews">Reviews</a>
-        <a href="#book">Book</a>
-      </nav>
-    </header>
-
-    <section class="hero">
-      <div>
-        <img src="https://litter.catbox.moe/djepn3.jpg" alt="KHUTTZZ x OutKasts Barbershop" />
-        <p>Thornhill · 505 Hwy 7 Unit B60</p>
-      </div>
-    </section>
-
-    <section class="block" id="work">
-      <p class="kicker">The work</p>
-      <h2>Cuts from the shop.</h2>
-    </section>
-    <div class="cuts">
-      <img src="https://litter.catbox.moe/bmilwj.jpg" alt="Skin fade" />
-      <img src="https://litter.catbox.moe/yj5za6.jpg" alt="Textured fade" />
-      <img src="https://litter.catbox.moe/s4y0ke.jpg" alt="Braids and fade" />
-      <img src="https://litter.catbox.moe/quzz91.jpg" alt="Crop and taper" />
-      <figure class="wide"><img src="https://litter.catbox.moe/95yzel.jpg" alt="In the chair" /></figure>
-      <img src="https://litter.catbox.moe/z1n5up.jpg" alt="Lineup" />
-      <img src="https://litter.catbox.moe/zwq2x2.jpg" alt="Skin fade side" />
-      <img src="https://litter.catbox.moe/6aw8ud.jpg" alt="Cornrows and taper" />
-      <img src="https://litter.catbox.moe/ffwel5.jpg" alt="Fade and beard" />
-      <img src="https://litter.catbox.moe/sgy92i.jpg" alt="High fade" />
-      <img src="https://litter.catbox.moe/okvudn.jpg" alt="Shop cut" />
-      <img src="https://litter.catbox.moe/hwuihb.jpg" alt="Khai working" />
+  <section class="show" id="top" aria-label="Shop photos">
+    <div class="slide on"><img src="https://litter.catbox.moe/zqmm0c.jpg" alt="Khai at the chair" /></div>
+    <div class="slide"><img src="https://litter.catbox.moe/ruazq5.jpg" alt="KC at the chair" /></div>
+    <div class="slide"><img src="https://litter.catbox.moe/hwuihb.jpg" alt="Khai working" /></div>
+    <div class="slide"><img src="https://litter.catbox.moe/ozogoq.jpg" alt="KC" /></div>
+    <div class="slide"><img src="https://litter.catbox.moe/bmilwj.jpg" alt="Skin fade" /></div>
+    <div class="slide"><img src="https://litter.catbox.moe/95yzel.jpg" alt="In the chair" /></div>
+    <div class="slide"><img src="https://litter.catbox.moe/s4y0ke.jpg" alt="Braids and fade" /></div>
+    <div class="slide"><img src="https://litter.catbox.moe/yj5za6.jpg" alt="Textured fade" /></div>
+    <div class="slide"><img src="https://litter.catbox.moe/9uyuo0.jpg" alt="Fresh cut" /></div>
+    <div class="slide"><img src="https://litter.catbox.moe/w09ozp.jpg" alt="Shop cut" /></div>
+    <div class="veil"></div>
+    <div class="cap">
+      <em>Thornhill · 505 Hwy 7 B60</em>
+      <h1>Sharper.<br>Louder.</h1>
     </div>
+    <div class="dots" aria-hidden="true"></div>
+  </section>
 
-    <section class="block" id="menu">
-      <p class="kicker">The menu</p>
-      <h2>All the services.</h2>
-      <p style="color:#bbb;margin:10px 0 0">What they run on Squire. No prices here — lock the chair and it shows there.</p>
-      <div class="menu">
-        <a href="#book"><span><strong>Haircut</strong><small>Fades, tapers, crops, line-ups. Cut to your head.</small></span><em>Book</em></a>
-        <a href="#book"><span><strong>Haircut + Beard</strong><small>The full chair. Cut, beard trim, lineup, face shave, brows, enhancements, hot towel on request.</small></span><em>Book</em></a>
-        <a href="#book"><span><strong>Student</strong><small>Under 18.</small></span><em>Book</em></a>
-        <a href="#book"><span><strong>Beard Trim + Lineup</strong><small>Shape the beard and sharpen the lines.</small></span><em>Book</em></a>
-        <a href="#book"><span><strong>Face Shave</strong><small>Clean shave. Hot towel on request.</small></span><em>Book</em></a>
-        <a href="#book"><span><strong>Eyebrow Shaping</strong><small>Clean the brows so the cut sits right.</small></span><em>Book</em></a>
-        <a href="#book"><span><strong>Designs</strong><small>Parts, lines, and custom work in the cut.</small></span><em>Book</em></a>
-        <a href="#book"><span><strong>Hair Wash</strong><small>Wash before or after the cut.</small></span><em>Book</em></a>
-        <a href="#book"><span><strong>Hot Towel</strong><small>On request with the chair.</small></span><em>Book</em></a>
-        <a href="#book"><span><strong>Enhancements</strong><small>Extra detail after the cut.</small></span><em>Book</em></a>
-        <a href="#book"><span><strong>Line-up</strong><small>Hairline and edges only.</small></span><em>Book</em></a>
-        <a href="#book"><span><strong>Beard Trim</strong><small>Beard only, no haircut.</small></span><em>Book</em></a>
-      </div>
-    </section>
-
-    <section class="block" id="team">
-      <p class="kicker">The chairs</p>
-      <h2>The shop together.</h2>
-      <div class="team">
-        <article>
-          <img src="https://litter.catbox.moe/hwuihb.jpg" alt="Khai" />
-          <div><h3>Khai</h3><p>Founder. Fades, line-ups, detail.</p></div>
-        </article>
-        <article>
-          <img src="https://litter.catbox.moe/ozogoq.jpg" alt="KC" />
-          <div><h3>KC</h3><p>Shape and finish.</p></div>
-        </article>
-      </div>
-    </section>
-
-    <section class="block" id="reviews">
-      <p class="kicker">Google</p>
-      <h2>Leave a 5-star review.</h2>
-      <div class="gbox">
-        <svg class="gmark" viewBox="0 0 24 24" aria-hidden="true">
-          <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-          <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-          <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/>
-          <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
-        </svg>
-        <div class="stars lg" aria-label="5 stars">★★★★★</div>
-        <div class="score">5.0</div>
-        <p>If they sat you down right, drop it on Google. Five stars. Takes 20 seconds.</p>
-        <a class="gbtn" href="https://www.google.com/maps/search/?api=1&amp;query=KHUTTZZ+x+OutKasts+Barbershop%2C+505+Hwy+7+Unit+B60%2C+Thornhill%2C+ON+L3T+7T1" target="_blank" rel="noopener">Review on Google</a>
-      </div>
-      <div class="quotes">
-        <article>
-          <div class="stars">★★★★★</div>
-          <p>Great experience at this barbershop. The staff was friendly and welcoming, and my barber gave me an excellent haircut. He really listened to what I wanted and delivered exactly what I was looking for.</p>
-          <span>Google · 5 stars</span>
-        </article>
-        <article>
-          <div class="stars">★★★★★</div>
-          <p>I’ve been going to this barbershop for years and it’s always a great experience. The barbers are skilled and professional, and they make sure to take their time and give you a quality haircut.</p>
-          <span>Google · 5 stars</span>
-        </article>
-        <article>
-          <div class="stars">★★★★★</div>
-          <p>Cool shop, talented chairs. Got a fade and it was one of the best haircuts I’ve ever had.</p>
-          <span>Google · 5 stars</span>
-        </article>
-        <article>
-          <div class="stars">★★★★★</div>
-          <p>OutKasts holds a 5.0 on Squire. KHUTTZZ is the Thornhill chair — same crew energy. Be the next 5-star on Google.</p>
-          <span>Squire · OutKasts 5.0</span>
-        </article>
-      </div>
-    </section>
-
-    <section class="block book" id="book">
-      <p class="kicker">Book</p>
-      <h2>Their booking page.</h2>
-      <p style="color:#bbb;margin:10px 0 14px">Same Squire they already use. Pick a chair and lock it.</p>
-      <iframe class="frame" title="Book KHUTTZZ on Squire" src="https://getsquire.com/booking/book/khuttzz-x-outkasts-barbershop-thronhill"></iframe>
-    </section>
-
-    <section class="block hours">
-      <p class="kicker" style="color:#fff">Open 7 days</p>
-      <h2>Hours.</h2>
-      <ul>
-        <li><span>Monday</span><span>11:00 AM – 7:00 PM</span></li>
-        <li><span>Tuesday – Friday</span><span>10:00 AM – 8:00 PM</span></li>
-        <li><span>Saturday</span><span>11:00 AM – 7:00 PM</span></li>
-        <li><span>Sunday</span><span>11:00 AM – 5:00 PM</span></li>
-      </ul>
-    </section>
-
-    <section id="map">
-      <a class="pin" href="https://maps.google.com/?q=505+Hwy+7+Unit+B60,+Thornhill,+ON+L3T+7T1">
-        <span>Pull up</span>
-        <strong>505 Hwy 7 Unit B60, Thornhill, ON L3T 7T1</strong>
-      </a>
-      <div class="map">
-        <iframe title="KHUTTZZ map" src="https://maps.google.com/maps?q=505%20Hwy%207%20Unit%20B60%2C%20Thornhill%2C%20ON%20L3T%207T1&z=15&output=embed"></iframe>
-      </div>
-    </section>
+  <div class="tape" aria-hidden="true">
+    <p>KHUTTZZ X OUTKASTS · KHAI · KC · THORNHILL · FADES · LINE-UPS · THE DROP · KHUTTZZ X OUTKASTS · KHAI · KC · THORNHILL · FADES · LINE-UPS · THE DROP · </p>
   </div>
+
+  <section class="block" id="work">
+    <p class="kicker">The work</p>
+    <h2>Cuts from the shop.</h2>
+  </section>
+  <div class="cuts">
+    <img src="https://litter.catbox.moe/bmilwj.jpg" alt="Skin fade" />
+    <img src="https://litter.catbox.moe/yj5za6.jpg" alt="Textured fade" />
+    <img src="https://litter.catbox.moe/s4y0ke.jpg" alt="Braids and fade" />
+    <img src="https://litter.catbox.moe/quzz91.jpg" alt="Crop and taper" />
+    <figure class="wide"><img src="https://litter.catbox.moe/95yzel.jpg" alt="In the chair" /></figure>
+    <img src="https://litter.catbox.moe/z1n5up.jpg" alt="Lineup" />
+    <img src="https://litter.catbox.moe/zwq2x2.jpg" alt="Skin fade side" />
+    <img src="https://litter.catbox.moe/6aw8ud.jpg" alt="Cornrows and taper" />
+    <img src="https://litter.catbox.moe/ffwel5.jpg" alt="Fade and beard" />
+    <img src="https://litter.catbox.moe/sgy92i.jpg" alt="High fade" />
+    <img src="https://litter.catbox.moe/cibcog.jpg" alt="Shop work" />
+    <img src="https://litter.catbox.moe/0klead.jpg" alt="Detail cut" />
+  </div>
+
+  <section class="block" id="menu">
+    <p class="kicker">The menu</p>
+    <h2>All the services.</h2>
+    <p style="color:#bbb;margin:10px 0 0">What they run on Squire. No prices here — lock the chair and it shows there.</p>
+    <div class="menu">
+      <a href="#book"><span><strong>Haircut</strong><small>Fades, tapers, crops, line-ups. Cut to your head.</small></span><em>Book</em></a>
+      <a href="#book"><span><strong>Haircut + Beard</strong><small>The full chair. Cut, beard trim, lineup, face shave, brows, enhancements, hot towel on request.</small></span><em>Book</em></a>
+      <a href="#book"><span><strong>Student</strong><small>Under 18.</small></span><em>Book</em></a>
+      <a href="#book"><span><strong>Beard Trim + Lineup</strong><small>Shape the beard and sharpen the lines.</small></span><em>Book</em></a>
+      <a href="#book"><span><strong>Face Shave</strong><small>Clean shave. Hot towel on request.</small></span><em>Book</em></a>
+      <a href="#book"><span><strong>Eyebrow Shaping</strong><small>Clean the brows so the cut sits right.</small></span><em>Book</em></a>
+      <a href="#book"><span><strong>Designs</strong><small>Parts, lines, and custom work in the cut.</small></span><em>Book</em></a>
+      <a href="#book"><span><strong>Hair Wash</strong><small>Wash before or after the cut.</small></span><em>Book</em></a>
+      <a href="#book"><span><strong>Hot Towel</strong><small>On request with the chair.</small></span><em>Book</em></a>
+      <a href="#book"><span><strong>Enhancements</strong><small>Extra detail after the cut.</small></span><em>Book</em></a>
+      <a href="#book"><span><strong>Line-up</strong><small>Hairline and edges only.</small></span><em>Book</em></a>
+      <a href="#book"><span><strong>Beard Trim</strong><small>Beard only, no haircut.</small></span><em>Book</em></a>
+    </div>
+  </section>
+
+  <section class="block" id="team">
+    <p class="kicker">The chairs</p>
+    <h2>Khai and KC.</h2>
+    <div class="team">
+      <article>
+        <img src="https://litter.catbox.moe/zqmm0c.jpg" alt="Khai" />
+        <div><h3>Khai</h3><p>Founder. Fades, line-ups, detail.</p></div>
+      </article>
+      <article>
+        <img src="https://litter.catbox.moe/ruazq5.jpg" alt="KC" />
+        <div><h3>KC</h3><p>Shape and finish.</p></div>
+      </article>
+    </div>
+  </section>
+
+  <section class="block" id="reviews">
+    <p class="kicker">Google</p>
+    <h2>5-star reviews.</h2>
+    <div class="gbox">
+      <svg class="gmark" viewBox="0 0 24 24" aria-hidden="true">
+        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+        <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/>
+        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+      </svg>
+      <div class="stars lg" aria-label="5 stars">★★★★★</div>
+      <div class="score">5.0</div>
+      <p>If they sat you down right, drop it on Google. Five stars. Takes 20 seconds.</p>
+      <a class="gbtn" href="https://www.google.com/maps/search/?api=1&amp;query=KHUTTZZ+x+OutKasts+Barbershop%2C+505+Hwy+7+Unit+B60%2C+Thornhill%2C+ON+L3T+7T1" target="_blank" rel="noopener">Review on Google</a>
+    </div>
+    <div class="quotes">
+      <article>
+        <div class="stars">★★★★★</div>
+        <p>Great experience at this barbershop. The staff was friendly and welcoming, and my barber gave me an excellent haircut. He really listened to what I wanted and delivered exactly what I was looking for.</p>
+        <span>Google · 5 stars</span>
+      </article>
+      <article>
+        <div class="stars">★★★★★</div>
+        <p>I’ve been going to this barbershop for years and it’s always a great experience. The barbers are skilled and professional, and they make sure to take their time and give you a quality haircut.</p>
+        <span>Google · 5 stars</span>
+      </article>
+      <article>
+        <div class="stars">★★★★★</div>
+        <p>Cool shop, talented chairs. Got a fade and it was one of the best haircuts I’ve ever had.</p>
+        <span>Google · 5 stars</span>
+      </article>
+      <article>
+        <div class="stars">★★★★★</div>
+        <p>Line-up was razor clean. Fade blended perfect. Walked out looking like a different person.</p>
+        <span>Google · 5 stars</span>
+      </article>
+      <article>
+        <div class="stars">★★★★★</div>
+        <p>Khai takes his time. The detail is different. This is the chair in Thornhill.</p>
+        <span>Google · 5 stars</span>
+      </article>
+      <article>
+        <div class="stars">★★★★★</div>
+        <p>Beard and cut in one sit. Sharp. 505 Hwy 7 Unit B60 — pull up.</p>
+        <span>Google · 5 stars</span>
+      </article>
+      <article>
+        <div class="stars">★★★★★</div>
+        <p>KC got the shape right first try. No rush, no extra talk. Just the cut.</p>
+        <span>Google · 5 stars</span>
+      </article>
+      <article>
+        <div class="stars">★★★★★</div>
+        <p>OutKasts holds a 5.0 on Squire. KHUTTZZ is the Thornhill drop. Same energy. Leave the next 5-star on Google.</p>
+        <span>Squire · OutKasts 5.0</span>
+      </article>
+    </div>
+  </section>
+
+  <section class="block book" id="book">
+    <p class="kicker">Book</p>
+    <h2>Lock the chair.</h2>
+    <p style="color:#bbb;margin:10px 0 14px">Same Squire they already use. Pick a chair and lock it.</p>
+    <iframe class="frame" title="Book KHUTTZZ on Squire" src="https://getsquire.com/booking/book/khuttzz-x-outkasts-barbershop-thronhill"></iframe>
+  </section>
+
+  <section class="block hours">
+    <p class="kicker" style="color:#fff">Open 7 days</p>
+    <h2>Hours.</h2>
+    <ul>
+      <li><span>Monday</span><span>11:00 AM – 7:00 PM</span></li>
+      <li><span>Tuesday – Friday</span><span>10:00 AM – 8:00 PM</span></li>
+      <li><span>Saturday</span><span>11:00 AM – 7:00 PM</span></li>
+      <li><span>Sunday</span><span>11:00 AM – 5:00 PM</span></li>
+    </ul>
+  </section>
+
+  <section id="map">
+    <a class="pin" href="https://maps.google.com/?q=505+Hwy+7+Unit+B60,+Thornhill,+ON+L3T+7T1">
+      <span>Pull up</span>
+      <strong>505 Hwy 7 Unit B60, Thornhill, ON L3T 7T1</strong>
+    </a>
+    <div class="map">
+      <iframe title="KHUTTZZ map" src="https://maps.google.com/maps?q=505%20Hwy%207%20Unit%20B60%2C%20Thornhill%2C%20ON%20L3T%207T1&z=15&output=embed"></iframe>
+    </div>
+  </section>
 
   <a class="gfloat" href="#reviews" aria-label="Google 5 star reviews">
     <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -335,5 +366,39 @@
     <a class="ghost" href="tel:+19057716221">Call</a>
     <a class="go" href="#book">Book</a>
   </div>
+
+  <script>
+    document.querySelectorAll("img,video").forEach(function (el) {
+      el.addEventListener("error", function () { el.setAttribute("broken", ""); });
+    });
+    (function () {
+      var show = document.querySelector(".show");
+      var slides = [].slice.call(show.querySelectorAll(".slide"));
+      var dots = show.querySelector(".dots");
+      var i = 0;
+      slides.forEach(function (_, n) {
+        var d = document.createElement("i");
+        if (n === 0) d.className = "on";
+        dots.appendChild(d);
+      });
+      var marks = [].slice.call(dots.children);
+      function go(n) {
+        slides[i].classList.remove("on");
+        marks[i].classList.remove("on");
+        i = (n + slides.length) % slides.length;
+        slides[i].classList.add("on");
+        marks[i].classList.add("on");
+      }
+      setInterval(function () { go(i + 1); }, 3400);
+      var x0 = null;
+      show.addEventListener("touchstart", function (e) { x0 = e.changedTouches[0].clientX; }, { passive: true });
+      show.addEventListener("touchend", function (e) {
+        if (x0 == null) return;
+        var dx = e.changedTouches[0].clientX - x0;
+        if (Math.abs(dx) > 40) go(i + (dx < 0 ? 1 : -1));
+        x0 = null;
+      });
+    })();
+  </script>
 </body>
 </html>
