@@ -113,7 +113,11 @@
     .hours li { display:flex; justify-content:space-between; padding:11px 0; border-bottom:1px solid rgba(255,255,255,.28); list-style:none; font-family:Oswald,sans-serif; letter-spacing:.08em; text-transform:uppercase; }
     .pin { display:block; padding:16px 16px; background:#0a0a0a; }
     .pin span { display:block; font-family:Oswald,sans-serif; letter-spacing:.14em; text-transform:uppercase; color:var(--red); font-size:.68rem; }
-    .map iframe { width:100%; height:280px; border:0; }
+    .map { background:#000; overflow:hidden; }
+    .map iframe {
+      width:100%; height:280px; border:0;
+      filter:invert(90%) hue-rotate(180deg) brightness(.92) contrast(1.08);
+    }
 
     .dock {
       position:fixed; left:0; right:0; bottom:0; z-index:30;
