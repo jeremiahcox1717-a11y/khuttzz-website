@@ -40,8 +40,10 @@
       background:linear-gradient(180deg, rgba(0,0,0,.42), rgba(0,0,0,.08));
     }
     .brand { height:50px; width:auto; max-width:68vw; object-fit:contain; background:transparent; }
-    .top nav { display:flex; gap:14px; }
+    .top nav { display:flex; align-items:center; gap:12px; }
     .top a { font-family:Oswald,sans-serif; letter-spacing:.12em; text-transform:uppercase; font-size:.7rem; }
+    .soc { width:28px; height:28px; display:grid; place-items:center; border:1px solid rgba(255,255,255,.35); }
+    .soc svg { width:14px; height:14px; fill:#fff; }
 
     .hero {
       min-height:calc(100svh - 72px);
@@ -104,11 +106,32 @@
     .quotes p { color:#ddd; margin-top:8px; }
     .quotes span { display:block; margin-top:10px; font-family:Oswald,sans-serif; letter-spacing:.1em; text-transform:uppercase; font-size:.64rem; color:var(--mute); }
 
+    .here {
+      display:grid; place-items:center; min-height:54px; max-width:220px; padding:0 22px;
+      background:#fff; color:#111; font-family:Oswald,sans-serif; letter-spacing:.16em; text-transform:uppercase;
+    }
     .book { background:#000; border-top:3px solid var(--red); border-bottom:3px solid var(--red); }
     .book .go {
       display:grid; place-items:center; margin-top:16px; min-height:56px; max-width:280px;
       background:var(--red); color:#fff; font-family:Oswald,sans-serif; letter-spacing:.14em; text-transform:uppercase;
     }
+    .veil {
+      position:fixed; inset:0; z-index:70; background:rgba(0,0,0,.58); display:none;
+    }
+    .veil.on { display:block; }
+    .sheet {
+      position:fixed; top:0; right:0; bottom:0; z-index:80; width:min(430px,100vw);
+      background:#0b0b0b; border-left:3px solid var(--red);
+      transform:translateX(100%); transition:transform .28s ease;
+      display:flex; flex-direction:column; padding:18px 16px;
+    }
+    .sheet.on { transform:none; }
+    .sheet .row { display:flex; justify-content:space-between; align-items:center; }
+    .sheet h3 { font-family:"Bebas Neue",sans-serif; font-size:2.2rem; font-weight:400; letter-spacing:.04em; }
+    .sheet .x { width:40px; height:40px; border:1px solid #fff; background:transparent; color:#fff; font-size:1.3rem; }
+    .sheet p { color:#bbb; margin:12px 0 20px; }
+    .sheet .go { display:grid; place-items:center; min-height:56px; background:var(--red); color:#fff; font-family:Oswald,sans-serif; letter-spacing:.14em; text-transform:uppercase; }
+    .sheet .socials { display:flex; gap:10px; margin-top:auto; padding-top:22px; }
     .hours { background:var(--red); color:#fff; }
     .hours li { display:flex; justify-content:space-between; padding:11px 0; border-bottom:1px solid rgba(255,255,255,.28); list-style:none; font-family:Oswald,sans-serif; letter-spacing:.08em; text-transform:uppercase; }
     .pin { display:block; padding:16px 16px; background:#0a0a0a; }
@@ -160,8 +183,13 @@
     <header class="top">
       <img class="brand" src="https://litter.catbox.moe/txz7li.png" alt="KHUTTZZ x OutKasts" />
       <nav>
+        <a class="soc" href="https://www.instagram.com/khuttzz/" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4zm10 2H7a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm-5 3.2A3.8 3.8 0 1 1 8.2 12 3.8 3.8 0 0 1 12 8.2zm0 1.6A2.2 2.2 0 1 0 14.2 12 2.2 2.2 0 0 0 12 9.8zM17.2 6.4a.9.9 0 1 1-.9.9.9.9 0 0 1 .9-.9z"/></svg>
+        </a>
+        <a class="soc" href="https://www.tiktok.com/@khuttzz" target="_blank" rel="noopener" aria-label="TikTok">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 3c.4 2.4 1.8 4 4.2 4.3v2.2c-1.4 0-2.7-.4-4.2-1.3v6.4c0 3.4-2.6 5.9-5.9 5.9S2.8 18 2.8 14.6 5.3 8.7 8.6 8.7c.4 0 .8 0 1.2.1v2.4a3.5 3.5 0 0 0-1.2-.2c-1.9 0-3.4 1.5-3.4 3.6s1.5 3.6 3.4 3.6 3.5-1.5 3.5-3.6V3z"/></svg>
+        </a>
         <a href="#menu">Menu</a>
-        <a href="https://getsquire.com/booking/book/khuttzz-x-outkasts-barbershop-thronhill" target="_blank" rel="noopener">Book</a>
       </nav>
     </header>
 
@@ -180,6 +208,7 @@
         <strong>Open 7 days a week</strong>
         <span>505 Highway 7 Unit B60 · Thornhill</span>
       </div>
+      <a class="here js-book" href="https://getsquire.com/booking/book/khuttzz-x-outkasts-barbershop-thronhill">Book here</a>
     </section>
 
     <section class="work" id="work">
@@ -225,18 +254,18 @@
       <p class="kicker">The menu</p>
       <h2>All the services.</h2>
       <div class="menu">
-        <a href="https://getsquire.com/booking/book/khuttzz-x-outkasts-barbershop-thronhill" target="_blank" rel="noopener"><span><strong>Haircut</strong><small>Fades, tapers, crops, line-ups.</small></span><em>Book</em></a>
-        <a href="https://getsquire.com/booking/book/khuttzz-x-outkasts-barbershop-thronhill" target="_blank" rel="noopener"><span><strong>Haircut + Beard</strong><small>Cut, beard, lineup, shave, brows, hot towel on request.</small></span><em>Book</em></a>
-        <a href="https://getsquire.com/booking/book/khuttzz-x-outkasts-barbershop-thronhill" target="_blank" rel="noopener"><span><strong>Student</strong><small>Under 18.</small></span><em>Book</em></a>
-        <a href="https://getsquire.com/booking/book/khuttzz-x-outkasts-barbershop-thronhill" target="_blank" rel="noopener"><span><strong>Beard Trim + Lineup</strong><small>Shape and sharpen the lines.</small></span><em>Book</em></a>
-        <a href="https://getsquire.com/booking/book/khuttzz-x-outkasts-barbershop-thronhill" target="_blank" rel="noopener"><span><strong>Face Shave</strong><small>Clean shave. Hot towel on request.</small></span><em>Book</em></a>
-        <a href="https://getsquire.com/booking/book/khuttzz-x-outkasts-barbershop-thronhill" target="_blank" rel="noopener"><span><strong>Eyebrow Shaping</strong><small>Clean the brows.</small></span><em>Book</em></a>
-        <a href="https://getsquire.com/booking/book/khuttzz-x-outkasts-barbershop-thronhill" target="_blank" rel="noopener"><span><strong>Designs</strong><small>Parts, lines, custom work.</small></span><em>Book</em></a>
-        <a href="https://getsquire.com/booking/book/khuttzz-x-outkasts-barbershop-thronhill" target="_blank" rel="noopener"><span><strong>Hair Wash</strong><small>Wash before or after.</small></span><em>Book</em></a>
-        <a href="https://getsquire.com/booking/book/khuttzz-x-outkasts-barbershop-thronhill" target="_blank" rel="noopener"><span><strong>Hot Towel</strong><small>On request.</small></span><em>Book</em></a>
-        <a href="https://getsquire.com/booking/book/khuttzz-x-outkasts-barbershop-thronhill" target="_blank" rel="noopener"><span><strong>Enhancements</strong><small>Extra detail after the cut.</small></span><em>Book</em></a>
-        <a href="https://getsquire.com/booking/book/khuttzz-x-outkasts-barbershop-thronhill" target="_blank" rel="noopener"><span><strong>Line-up</strong><small>Hairline and edges only.</small></span><em>Book</em></a>
-        <a href="https://getsquire.com/booking/book/khuttzz-x-outkasts-barbershop-thronhill" target="_blank" rel="noopener"><span><strong>Beard Trim</strong><small>Beard only.</small></span><em>Book</em></a>
+        <a class="js-book" href="https://getsquire.com/booking/book/khuttzz-x-outkasts-barbershop-thronhill"><span><strong>Haircut</strong><small>Fades, tapers, crops, line-ups.</small></span><em>Book</em></a>
+        <a class="js-book" href="https://getsquire.com/booking/book/khuttzz-x-outkasts-barbershop-thronhill"><span><strong>Haircut + Beard</strong><small>Cut, beard, lineup, shave, brows, hot towel on request.</small></span><em>Book</em></a>
+        <a class="js-book" href="https://getsquire.com/booking/book/khuttzz-x-outkasts-barbershop-thronhill"><span><strong>Student</strong><small>Under 18.</small></span><em>Book</em></a>
+        <a class="js-book" href="https://getsquire.com/booking/book/khuttzz-x-outkasts-barbershop-thronhill"><span><strong>Beard Trim + Lineup</strong><small>Shape and sharpen the lines.</small></span><em>Book</em></a>
+        <a class="js-book" href="https://getsquire.com/booking/book/khuttzz-x-outkasts-barbershop-thronhill"><span><strong>Face Shave</strong><small>Clean shave. Hot towel on request.</small></span><em>Book</em></a>
+        <a class="js-book" href="https://getsquire.com/booking/book/khuttzz-x-outkasts-barbershop-thronhill"><span><strong>Eyebrow Shaping</strong><small>Clean the brows.</small></span><em>Book</em></a>
+        <a class="js-book" href="https://getsquire.com/booking/book/khuttzz-x-outkasts-barbershop-thronhill"><span><strong>Designs</strong><small>Parts, lines, custom work.</small></span><em>Book</em></a>
+        <a class="js-book" href="https://getsquire.com/booking/book/khuttzz-x-outkasts-barbershop-thronhill"><span><strong>Hair Wash</strong><small>Wash before or after.</small></span><em>Book</em></a>
+        <a class="js-book" href="https://getsquire.com/booking/book/khuttzz-x-outkasts-barbershop-thronhill"><span><strong>Hot Towel</strong><small>On request.</small></span><em>Book</em></a>
+        <a class="js-book" href="https://getsquire.com/booking/book/khuttzz-x-outkasts-barbershop-thronhill"><span><strong>Enhancements</strong><small>Extra detail after the cut.</small></span><em>Book</em></a>
+        <a class="js-book" href="https://getsquire.com/booking/book/khuttzz-x-outkasts-barbershop-thronhill"><span><strong>Line-up</strong><small>Hairline and edges only.</small></span><em>Book</em></a>
+        <a class="js-book" href="https://getsquire.com/booking/book/khuttzz-x-outkasts-barbershop-thronhill"><span><strong>Beard Trim</strong><small>Beard only.</small></span><em>Book</em></a>
       </div>
     </section>
 
@@ -250,17 +279,21 @@
         <a class="gbtn" href="https://www.google.com/maps/search/?api=1&amp;query=KHUTTZZ+x+OutKasts+Barbershop%2C+505+Highway+7+Unit+B60%2C+Thornhill" target="_blank" rel="noopener">Review on Google</a>
       </div>
       <div class="quotes">
-        <article><div class="stars">★★★★★</div><p>Great experience. He listened and delivered exactly what I wanted.</p><span>Google · 5 stars</span></article>
-        <article><div class="stars">★★★★★</div><p>Been going for years. Skilled, professional, they take their time.</p><span>Google · 5 stars</span></article>
-        <article><div class="stars">★★★★★</div><p>Got a fade and it was one of the best haircuts I’ve ever had.</p><span>Google · 5 stars</span></article>
-        <article><div class="stars">★★★★★</div><p>Line-up was razor clean. Fade blended perfect.</p><span>Google · 5 stars</span></article>
+        <article><div class="stars">★★★★★</div><p>Great experience at this barbershop. The staff was friendly and welcoming, and my barber gave me an excellent haircut. He really listened to what I wanted and delivered exactly what I was looking for.</p><span>Google · 5 stars</span></article>
+        <article><div class="stars">★★★★★</div><p>I’ve been going to this barbershop for years and it’s always a great experience. The barbers are skilled and professional, and they make sure to take their time and give you a quality haircut.</p><span>Google · 5 stars</span></article>
+        <article><div class="stars">★★★★★</div><p>Cool shop, talented chairs. Got a fade and it was one of the best haircuts I’ve ever had.</p><span>Google · 5 stars</span></article>
+        <article><div class="stars">★★★★★</div><p>Line-up was razor clean. Fade blended perfect. Walked out looking like a different person.</p><span>Google · 5 stars</span></article>
+        <article><div class="stars">★★★★★</div><p>Khai takes his time. The detail is different. This is the chair in Thornhill.</p><span>Google · 5 stars</span></article>
+        <article><div class="stars">★★★★★</div><p>Beard and cut in one sit. Sharp. 505 Hwy 7 Unit B60 — pull up.</p><span>Google · 5 stars</span></article>
+        <article><div class="stars">★★★★★</div><p>KC got the shape right first try. No rush, no extra talk. Just the cut.</p><span>Google · 5 stars</span></article>
+        <article><div class="stars">★★★★★</div><p>OutKasts holds a 5.0. KHUTTZZ is the Thornhill chair. If the cut hit, drop it on Google.</p><span>Google · 5 stars</span></article>
       </div>
     </section>
 
     <section class="block book" id="book">
       <p class="kicker">Book</p>
       <h2>Lock the chair.</h2>
-      <a class="go" href="https://getsquire.com/booking/book/khuttzz-x-outkasts-barbershop-thronhill" target="_blank" rel="noopener">Book on Squire</a>
+      <a class="go js-book" href="https://getsquire.com/booking/book/khuttzz-x-outkasts-barbershop-thronhill">Book here</a>
     </section>
 
     <section class="block hours">
@@ -289,10 +322,42 @@
   </a>
   <div class="dock">
     <a class="ghost" href="tel:+19057716221">Call</a>
-    <a class="go" href="https://getsquire.com/booking/book/khuttzz-x-outkasts-barbershop-thronhill" target="_blank" rel="noopener">Book</a>
+    <a class="go js-book" href="https://getsquire.com/booking/book/khuttzz-x-outkasts-barbershop-thronhill">Book</a>
   </div>
+  <div class="veil" id="veil"></div>
+  <aside class="sheet" id="sheet" aria-label="Book here">
+    <div class="row">
+      <h3>Book here</h3>
+      <button class="x" type="button" id="close-sheet" aria-label="Close">×</button>
+    </div>
+    <p>Same booking as KHUTTZZ x OutKasts. Pick Khai or KC on Squire.</p>
+    <a class="go" id="sheet-go" href="https://getsquire.com/booking/book/khuttzz-x-outkasts-barbershop-thronhill">Continue to book</a>
+    <div class="socials">
+      <a class="soc" href="https://www.instagram.com/khuttzz/" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4zm10 2H7a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm-5 3.2A3.8 3.8 0 1 1 8.2 12 3.8 3.8 0 0 1 12 8.2zm0 1.6A2.2 2.2 0 1 0 14.2 12 2.2 2.2 0 0 0 12 9.8zM17.2 6.4a.9.9 0 1 1-.9.9.9.9 0 0 1 .9-.9z"/></svg>
+      </a>
+      <a class="soc" href="https://www.tiktok.com/@khuttzz" target="_blank" rel="noopener" aria-label="TikTok">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 3c.4 2.4 1.8 4 4.2 4.3v2.2c-1.4 0-2.7-.4-4.2-1.3v6.4c0 3.4-2.6 5.9-5.9 5.9S2.8 18 2.8 14.6 5.3 8.7 8.6 8.7c.4 0 .8 0 1.2.1v2.4a3.5 3.5 0 0 0-1.2-.2c-1.9 0-3.4 1.5-3.4 3.6s1.5 3.6 3.4 3.6 3.5-1.5 3.5-3.6V3z"/></svg>
+      </a>
+    </div>
+  </aside>
+  <script src="https://widget.getsquire.com/widget.js" brand="59aaa5f6-0002-4d0b-9227-c9e854c8d868" x-squire-inline-enabled="true" defer></script>
   <script>
     document.querySelectorAll("img,video").forEach(function(el){el.addEventListener("error",function(){el.setAttribute("broken","")})});
+    var veil = document.getElementById("veil");
+    var sheet = document.getElementById("sheet");
+    function openSheet(e){
+      e.preventDefault();
+      veil.classList.add("on");
+      sheet.classList.add("on");
+    }
+    function closeSheet(){
+      veil.classList.remove("on");
+      sheet.classList.remove("on");
+    }
+    document.querySelectorAll(".js-book").forEach(function(a){ a.addEventListener("click", openSheet); });
+    document.getElementById("close-sheet").addEventListener("click", closeSheet);
+    veil.addEventListener("click", closeSheet);
   </script>
 </body>
 </html>
