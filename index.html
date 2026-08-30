@@ -50,8 +50,25 @@
     }
     .show .cap em {
       display:inline-block; font-style:normal; font-family:Oswald,sans-serif;
-      letter-spacing:.18em; text-transform:uppercase; font-size:.62rem;
+      letter-spacing:.14em; text-transform:uppercase; font-size:.62rem;
       background:var(--red); color:#fff; padding:4px 8px; margin-bottom:8px;
+    }
+    .show .cap b {
+      display:block; font-weight:400; font-family:Oswald,sans-serif;
+      letter-spacing:.1em; text-transform:uppercase; font-size:.78rem;
+      color:#fff; text-shadow:0 2px 12px #000; margin-top:8px;
+    }
+    .info {
+      background:#000; color:#fff; padding:16px 12px;
+      border-bottom:3px solid var(--red);
+    }
+    .info strong {
+      display:block; font-family:Anton,sans-serif; font-size:clamp(1.6rem,7vw,2.6rem);
+      letter-spacing:.04em; text-transform:uppercase; line-height:.95;
+    }
+    .info span {
+      display:block; margin-top:6px; font-family:Oswald,sans-serif;
+      letter-spacing:.12em; text-transform:uppercase; font-size:.78rem; color:#ddd;
     }
     .show h1 {
       font-family:Anton,sans-serif; font-size:clamp(3.2rem,16vw,7rem);
@@ -198,15 +215,21 @@
     <div class="slide"><img src="https://litter.catbox.moe/ozogoq.jpg" alt="KC" /></div>
     <div class="veil"></div>
     <div class="cap">
-      <em>Thornhill · 505 Hwy 7 B60</em>
+      <em>Open 7 days a week</em>
       <h1>Sharper.<br>Louder.</h1>
+      <b>505 Highway 7 Unit B60</b>
     </div>
     <div class="dots" aria-hidden="true"></div>
   </section>
 
   <div class="tape" aria-hidden="true">
-    <p>KHUTTZZ X OUTKASTS · KHAI · KC · THORNHILL · FADES · LINE-UPS · THE DROP · KHUTTZZ X OUTKASTS · KHAI · KC · THORNHILL · FADES · LINE-UPS · THE DROP · </p>
+    <p>OPEN 7 DAYS A WEEK · 505 HIGHWAY 7 UNIT B60 · OPEN 7 DAYS A WEEK · 505 HIGHWAY 7 UNIT B60 · OPEN 7 DAYS A WEEK · 505 HIGHWAY 7 UNIT B60 · </p>
   </div>
+
+  <section class="info">
+    <strong>Open 7 days a week</strong>
+    <span>505 Highway 7 Unit B60 · Thornhill</span>
+  </section>
 
   <section class="block" id="work">
     <p class="kicker">The work</p>
@@ -336,7 +359,7 @@
   </section>
 
   <section class="block hours">
-    <p class="kicker" style="color:#fff">Open 7 days</p>
+      <p class="kicker" style="color:#fff">Open 7 days a week</p>
     <h2>Hours.</h2>
     <ul>
       <li><span>Monday</span><span>11:00 AM – 7:00 PM</span></li>
