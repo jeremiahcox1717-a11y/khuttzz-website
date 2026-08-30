@@ -39,32 +39,31 @@
       padding:calc(8px + env(safe-area-inset-top)) 12px 8px;
       background:rgba(0,0,0,.78); border-bottom:3px solid var(--red);
     }
-    .brand { height:46px; width:auto; max-width:66vw; object-fit:contain; }
+    .brand { height:52px; width:auto; max-width:68vw; object-fit:contain; background:transparent; }
     .top nav { display:flex; gap:12px; }
     .top a { font-family:Oswald,sans-serif; letter-spacing:.12em; text-transform:uppercase; font-size:.7rem; }
 
-    .shots {
-      display:grid; grid-template-columns:1fr 1fr; gap:4px; padding:8px 4px 0;
+    .pair { display:grid; grid-template-columns:1fr 1fr; gap:3px; padding:10px 8px 0; }
+    .pair img { height:58vw; object-fit:cover; }
+    .pair p { padding:10px; background:#000; border-top:3px solid var(--red); font-family:"Bebas Neue",sans-serif; font-size:1.7rem; }
+    .pair small { display:block; margin-top:2px; font-family:Oswald,sans-serif; letter-spacing:.16em; text-transform:uppercase; font-size:.62rem; color:var(--mute); }
+    @media (min-width:700px) { .pair img { height:36vw; } .brand { height:62px; } }
+
+    .collage {
+      display:grid; grid-template-columns:1fr 1fr; gap:3px;
     }
-    .shots img { height:48vw; object-fit:cover; }
-    .shots .wide { grid-column:span 2; }
-    .shots .wide img { height:56vw; }
+    .collage img { height:48vw; object-fit:cover; }
+    .collage .tall { grid-row:span 2; }
+    .collage .tall img { height:100%; min-height:98vw; }
     @media (min-width:800px) {
-      .shots { grid-template-columns:repeat(3,1fr); padding:12px; }
-      .shots img { height:28vw; }
-      .shots .wide { grid-column:span 2; }
-      .shots .wide img { height:28vw; }
-      .brand { height:56px; }
+      .collage { grid-template-columns:repeat(3,1fr); }
+      .collage img { height:30vw; }
+      .collage .tall img { min-height:60vw; }
     }
 
     .bar { padding:16px 12px; background:#000; border-top:3px solid var(--red); border-bottom:3px solid var(--red); }
     .bar strong { display:block; font-family:"Bebas Neue",sans-serif; font-size:1.9rem; letter-spacing:.04em; text-transform:uppercase; }
     .bar span { display:block; margin-top:4px; font-family:Oswald,sans-serif; letter-spacing:.1em; text-transform:uppercase; font-size:.72rem; color:#ccc; }
-
-    .pair { display:grid; grid-template-columns:1fr 1fr; gap:3px; background:#000; }
-    .pair img { height:70vw; object-fit:cover; }
-    .pair p { padding:10px; background:#000; border-top:3px solid var(--red); font-family:"Bebas Neue",sans-serif; font-size:1.7rem; }
-    @media (min-width:700px) { .pair img { height:40vw; } }
 
     .block { padding:26px 12px; background:#000; }
     .kicker { font-family:Oswald,sans-serif; letter-spacing:.18em; text-transform:uppercase; color:var(--red); font-size:.68rem; margin-bottom:6px; }
@@ -130,21 +129,22 @@
 
   <div class="wrap">
     <header class="top">
-      <img class="brand" src="https://litter.catbox.moe/knqk5e.jpg" alt="KHUTTZZ x OutKasts" />
+      <img class="brand" src="https://litter.catbox.moe/txz7li.png" alt="KHUTTZZ x OutKasts" />
       <nav>
         <a href="#menu">Menu</a>
         <a href="#book">Book</a>
       </nav>
     </header>
 
-    <div class="shots">
-      <figure class="wide"><img src="https://litter.catbox.moe/s7dfd9.jpg" alt="The shop together" /></figure>
-      <img src="https://litter.catbox.moe/mxjxub.jpg" alt="Cut" />
-      <img src="https://litter.catbox.moe/qoe8oa.jpg" alt="Cut" />
-      <img src="https://litter.catbox.moe/k8cfgh.jpg" alt="Drop fade" />
-      <img src="https://litter.catbox.moe/6e8szi.jpg" alt="High fade" />
-      <img src="https://litter.catbox.moe/ospmlb.jpg" alt="Skin fade" />
-      <img src="https://litter.catbox.moe/33y6kc.jpg" alt="Chair cut" />
+    <div class="pair">
+      <article>
+        <img src="https://litter.catbox.moe/ihnhjx.jpg" alt="Khai" />
+        <p>Khai<small>Barber</small></p>
+      </article>
+      <article>
+        <img src="https://litter.catbox.moe/3e9474.jpg" alt="KC" />
+        <p>KC<small>Barber</small></p>
+      </article>
     </div>
 
     <section class="bar">
@@ -152,15 +152,15 @@
       <span>505 Highway 7 Unit B60 · Thornhill</span>
     </section>
 
-    <div class="pair">
-      <article>
-        <img src="https://litter.catbox.moe/ihnhjx.jpg" alt="Khai" />
-        <p>Khai</p>
-      </article>
-      <article>
-        <img src="https://litter.catbox.moe/3e9474.jpg" alt="KC" />
-        <p>KC</p>
-      </article>
+    <section class="block" id="work">
+      <p class="kicker">The work</p>
+      <h2>Cuts.</h2>
+    </section>
+    <div class="collage">
+      <img src="https://litter.catbox.moe/qoe8oa.jpg" alt="Fade" />
+      <img src="https://litter.catbox.moe/k8cfgh.jpg" alt="Drop fade" />
+      <img class="tall" src="https://litter.catbox.moe/6e8szi.jpg" alt="High fade" />
+      <img src="https://litter.catbox.moe/ospmlb.jpg" alt="Skin fade" />
     </div>
 
     <section class="block" id="menu">
