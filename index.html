@@ -173,29 +173,29 @@
     .gfloat {
       position:fixed; z-index:30; right:14px;
       bottom:calc(16px + env(safe-area-inset-bottom));
-      width:104px; height:104px; padding:0 0 16px; gap:0;
+      width:80px; height:80px; padding:0 0 12px; gap:0;
       display:grid; place-items:center;
       background:#fff; color:#111;
-      border-radius:14px;
+      border-radius:12px;
       overflow:hidden;
-      box-shadow:0 12px 32px rgba(0,0,0,.5);
+      box-shadow:0 10px 28px rgba(0,0,0,.45);
     }
-    .gfloat svg { width:48px; height:48px; }
+    .gfloat svg { width:34px; height:34px; }
     .gfloat span { display:none; }
     .gfloat::after {
       content:"5.0";
       position:absolute;
-      bottom:12px;
+      bottom:8px;
       font-family:Oswald,sans-serif;
-      font-size:.78rem;
-      letter-spacing:.1em;
+      font-size:.58rem;
+      letter-spacing:.08em;
       color:#111;
     }
 
     @media (min-width:860px) {
-      .gfloat { width:120px; height:120px; bottom:18px; right:18px; padding-bottom:18px; }
-      .gfloat svg { width:56px; height:56px; }
-      .gfloat::after { font-size:.88rem; bottom:14px; }
+      .gfloat { width:86px; height:86px; bottom:18px; right:18px; padding-bottom:14px; }
+      .gfloat svg { width:38px; height:38px; }
+      .gfloat::after { font-size:.62rem; bottom:10px; }
     }
   </style>
 </head>
@@ -218,8 +218,8 @@
     </a>
     <nav>
       <a href="#menu">Menu</a>
-      <a href="#reviews">Reviews</a>
       <a class="book-here" href="https://getsquire.com/booking/book/khuttzz-x-outkasts-barbershop-thronhill" target="_blank" rel="noopener">Book Here</a>
+      <a href="#reviews">Reviews</a>
     </nav>
   </header>
 
@@ -262,6 +262,16 @@
     </div>
   </section>
 
+  <section class="block book" id="book">
+    <p class="kicker">Book</p>
+    <h2>Book Here.</h2>
+    <p style="color:#bbb;margin:10px 0 0">Same Squire page as KHUTTZZ on OutKasts.</p>
+    <div class="book-cta">
+      <a href="https://getsquire.com/booking/book/khuttzz-x-outkasts-barbershop-thronhill" target="_blank" rel="noopener">Book Here</a>
+      <a class="ghost" href="book.html">Open booking page</a>
+    </div>
+  </section>
+
   <section class="block" id="reviews">
     <p class="kicker">Google</p>
     <h2>5-star reviews.</h2>
@@ -278,16 +288,6 @@
       <article><div class="stars">★★★★★</div><p>Line-up was razor clean. Fade blended perfect.</p><span>Google · 5 stars</span></article>
       <article><div class="stars">★★★★★</div><p>Khai takes his time. The detail is different.</p><span>Google · 5 stars</span></article>
       <article><div class="stars">★★★★★</div><p>KC got the shape right first try. Just the cut.</p><span>Google · 5 stars</span></article>
-    </div>
-  </section>
-
-  <section class="block book" id="book">
-    <p class="kicker">Book</p>
-    <h2>Book Here.</h2>
-    <p style="color:#bbb;margin:10px 0 0">Same Squire page as KHUTTZZ on OutKasts.</p>
-    <div class="book-cta">
-      <a href="https://getsquire.com/booking/book/khuttzz-x-outkasts-barbershop-thronhill" target="_blank" rel="noopener">Book Here</a>
-      <a class="ghost" href="book.html">Open booking page</a>
     </div>
   </section>
 
