@@ -16,11 +16,24 @@
     * { box-sizing:border-box; margin:0; padding:0; }
     html,body { width:100%; overflow-x:hidden; background:#000; color:var(--ink); }
     body { font-family:Outfit,system-ui,sans-serif; }
-    img { display:block; }
+    img,video { display:block; }
     a { color:inherit; text-decoration:none; }
-    img[broken] { display:none !important; }
+    img[broken],video[broken] { display:none !important; }
 
-    .wrap { position:relative; z-index:2; background:#000; }
+    .wall {
+      position:fixed; inset:0; z-index:0;
+      display:grid; grid-template-columns:1fr 1fr;
+    }
+    .wall video { width:100%; height:25vh; object-fit:cover; }
+    @media (min-width:700px) {
+      .wall { grid-template-columns:repeat(4,1fr); }
+      .wall video { height:50vh; }
+    }
+    .shade {
+      position:fixed; inset:0; z-index:1; pointer-events:none;
+      background:rgba(0,0,0,.55);
+    }
+    .wrap { position:relative; z-index:2; background:transparent; }
     .block, .bar, .hours, .pin, .menu a, .quotes article, .gbox { background:#000; }
 
     .top {
@@ -29,10 +42,21 @@
       padding:calc(8px + env(safe-area-inset-top)) 12px 8px;
       background:#000; border-bottom:3px solid var(--red);
     }
-    .brand { height:44px; width:auto; max-width:64vw; object-fit:contain; object-position:left center; }
-    .top nav { display:flex; gap:14px; }
+    .brand-lockup { display:flex; align-items:center; gap:8px; min-width:0; }
+    .brand {
+      height:46px; width:auto; max-width:52vw;
+      object-fit:contain; object-position:left center;
+      filter:invert(1);
+      background:#f3eee6;
+    }
+    .brand-x {
+      font-family:Oswald,sans-serif; letter-spacing:.14em; text-transform:uppercase;
+      font-size:.62rem; color:#fff; white-space:nowrap;
+    }
+    .top nav { display:flex; gap:14px; flex:none; }
     .top nav a { font-family:Oswald,sans-serif; letter-spacing:.12em; text-transform:uppercase; font-size:.7rem; }
 
+    .hero { height:46vh; min-height:220px; background:transparent; }
     .bar {
       padding:16px 12px; background:#000; border-bottom:3px solid var(--red);
     }
@@ -50,7 +74,8 @@
     h2 { font-family:"Bebas Neue",sans-serif; font-size:clamp(2.2rem,11vw,4.2rem); line-height:.88; font-weight:400; text-transform:uppercase; }
 
     @media (min-width:800px) {
-      .brand { height:52px; }
+      .hero { height:58vh; }
+      .brand { height:56px; max-width:42vw; }
     }
 
     .menu { display:grid; gap:3px; margin-top:14px; }
@@ -104,9 +129,23 @@
   </style>
 </head>
 <body>
+  <div class="wall" aria-hidden="true">
+    <video src="https://litter.catbox.moe/cfo149.mp4" muted autoplay loop playsinline preload="metadata"></video>
+    <video src="https://litter.catbox.moe/54lyvd.mp4" muted autoplay loop playsinline preload="metadata"></video>
+    <video src="https://litter.catbox.moe/b83do5.mp4" muted autoplay loop playsinline preload="metadata"></video>
+    <video src="https://litter.catbox.moe/eoz955.mp4" muted autoplay loop playsinline preload="metadata"></video>
+    <video src="https://litter.catbox.moe/suy4uv.mp4" muted autoplay loop playsinline preload="metadata"></video>
+    <video src="https://litter.catbox.moe/kaxnzs.mp4" muted autoplay loop playsinline preload="metadata"></video>
+    <video src="https://litter.catbox.moe/lvbzpz.mp4" muted autoplay loop playsinline preload="metadata"></video>
+    <video src="https://litter.catbox.moe/vazu9y.mp4" muted autoplay loop playsinline preload="metadata"></video>
+  </div>
+  <div class="shade"></div>
   <div class="wrap">
   <header class="top">
-    <img class="brand" src="assets/collab.jpg" width="200" height="89" alt="KHUTTZZ x OutKasts" />
+    <a class="brand-lockup" href="index.html" aria-label="KHUTTZZ x OutKasts">
+      <img class="brand" src="assets/logo.png" width="320" height="180" alt="KHUTTZZ" />
+      <span class="brand-x">× OutKasts</span>
+    </a>
     <nav>
       <a href="#menu">Menu</a>
       <a href="#reviews">Reviews</a>
@@ -114,6 +153,7 @@
     </nav>
   </header>
 
+  <section class="hero" aria-hidden="true"></section>
   <section class="bar">
     <strong>Open 7 days a week</strong>
     <span>505 Highway 7 Unit B60 · Thornhill</span>
@@ -201,7 +241,7 @@
 
   </div>
   <script>
-    document.querySelectorAll("img").forEach(function (el) {
+    document.querySelectorAll("img,video").forEach(function (el) {
       el.addEventListener("error", function () { el.setAttribute("broken", ""); });
     });
   </script>

@@ -24,7 +24,12 @@
       padding:calc(8px + env(safe-area-inset-top)) 14px 8px;
       background:#000; border-bottom:3px solid var(--red);
     }
-    .top img { height:40px; width:auto; max-width:62vw; object-fit:contain; }
+    .brand-lockup { display:flex; align-items:center; gap:8px; min-width:0; }
+    .top img {
+      height:42px; width:auto; max-width:48vw; object-fit:contain;
+      filter:invert(1); background:#f3eee6;
+    }
+    .brand-x { font-family:Oswald,sans-serif; letter-spacing:.14em; text-transform:uppercase; font-size:.62rem; }
     .top a { font-family:Oswald,sans-serif; letter-spacing:.12em; text-transform:uppercase; font-size:.72rem; }
 
     .hero {
@@ -67,7 +72,10 @@
 </head>
 <body>
   <header class="top">
-    <img src="assets/collab.jpg" alt="KHUTTZZ x OutKasts" />
+    <a class="brand-lockup" href="index.html" aria-label="KHUTTZZ x OutKasts">
+      <img src="assets/logo.png" alt="KHUTTZZ" />
+      <span class="brand-x">× OutKasts</span>
+    </a>
     <a href="index.html">Home</a>
   </header>
 
