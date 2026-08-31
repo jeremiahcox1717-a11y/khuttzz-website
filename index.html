@@ -32,6 +32,7 @@
       width:100%; height:100%;
       object-fit:cover;
       pointer-events:none;
+      transition:opacity .25s ease;
     }
     @media (min-width:700px) {
       .wall {
@@ -201,14 +202,14 @@
 </head>
 <body>
   <div class="wall" aria-hidden="true">
-    <video src="assets/reels/1.mp4" muted autoplay loop playsinline webkit-playsinline preload="auto"></video>
-    <video src="assets/reels/2.mp4" muted autoplay loop playsinline webkit-playsinline preload="auto"></video>
-    <video src="assets/reels/3.mp4" muted autoplay loop playsinline webkit-playsinline preload="auto"></video>
-    <video src="assets/reels/4.mp4" muted autoplay loop playsinline webkit-playsinline preload="auto"></video>
-    <video src="assets/reels/5.mp4" muted autoplay loop playsinline webkit-playsinline preload="auto"></video>
-    <video src="assets/reels/6.mp4" muted autoplay loop playsinline webkit-playsinline preload="auto"></video>
-    <video src="assets/reels/7.mp4" muted autoplay loop playsinline webkit-playsinline preload="auto"></video>
-    <video src="assets/reels/8.mp4" muted autoplay loop playsinline webkit-playsinline preload="auto"></video>
+    <video src="assets/reels/1.mp4" muted autoplay playsinline webkit-playsinline preload="auto"></video>
+    <video src="assets/reels/2.mp4" muted autoplay playsinline webkit-playsinline preload="auto"></video>
+    <video src="assets/reels/3.mp4" muted autoplay playsinline webkit-playsinline preload="auto"></video>
+    <video src="assets/reels/4.mp4" muted autoplay playsinline webkit-playsinline preload="auto"></video>
+    <video src="assets/reels/5.mp4" muted autoplay playsinline webkit-playsinline preload="auto"></video>
+    <video src="assets/reels/6.mp4" muted autoplay playsinline webkit-playsinline preload="auto"></video>
+    <video src="assets/reels/7.mp4" muted autoplay playsinline webkit-playsinline preload="auto"></video>
+    <video src="assets/reels/8.mp4" muted autoplay playsinline webkit-playsinline preload="auto"></video>
   </div>
   <div class="shade"></div>
   <div class="wrap">
@@ -329,15 +330,79 @@
   </div>
   <script>
     (function () {
-      function playWall() {
-        document.querySelectorAll(".wall video").forEach(function (v) {
-          v.muted = true;
-          v.playsInline = true;
-          var p = v.play();
-          if (p && p.catch) p.catch(function () {});
-        });
+      var REELS = [
+        "assets/reels/1.mp4",
+        "assets/reels/2.mp4",
+        "assets/reels/3.mp4",
+        "assets/reels/4.mp4",
+        "assets/reels/5.mp4",
+        "assets/reels/6.mp4",
+        "assets/reels/7.mp4",
+        "assets/reels/8.mp4"
+      ];
+      var videos = document.querySelectorAll(".wall video");
+      var slots = [];
+
+      function playSafe(v) {
+        v.muted = true;
+        v.playsInline = true;
+        var p = v.play();
+        if (p && p.catch) p.catch(function () {});
       }
-      playWall();
+
+      function nextUnused(from) {
+        var used = slots.map(function (s) { return s.idx; });
+        for (var step = 1; step <= REELS.length; step++) {
+          var n = (from + step) % REELS.length;
+          if (used.indexOf(n) === -1) return n;
+        }
+        return (from + 1) % REELS.length;
+      }
+
+      Array.prototype.forEach.call(videos, function (v, slot) {
+        var state = { v: v, idx: slot, plays: 0, armed: true };
+        slots.push(state);
+        v.loop = false;
+        v.removeAttribute("loop");
+        v.muted = true;
+        v.playsInline = true;
+
+        function finishOnce() {
+          if (!state.armed) return;
+          state.armed = false;
+          state.plays += 1;
+          if (state.plays < 2) {
+            try { v.currentTime = 0.05; } catch (e) {}
+            playSafe(v);
+            setTimeout(function () { state.armed = true; }, 500);
+            return;
+          }
+          state.plays = 0;
+          state.idx = nextUnused(state.idx);
+          v.style.opacity = "0";
+          setTimeout(function () {
+            v.src = REELS[state.idx];
+            v.load();
+            playSafe(v);
+            setTimeout(function () { state.armed = true; }, 500);
+          }, 160);
+        }
+
+        v.addEventListener("playing", function () {
+          v.style.opacity = "1";
+        });
+        v.addEventListener("timeupdate", function () {
+          if (!v.duration || v.currentTime < v.duration - 0.12) return;
+          finishOnce();
+        });
+        v.addEventListener("ended", finishOnce);
+
+        playSafe(v);
+      });
+
+      function playWall() {
+        Array.prototype.forEach.call(videos, playSafe);
+      }
       document.addEventListener("DOMContentLoaded", playWall);
       window.addEventListener("load", playWall);
       document.addEventListener("touchstart", playWall, { once: true });
