@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>KHUTTZZ x OutKasts | Thornhill</title>
+  <link rel="icon" href="assets/logo.png" />
   <meta name="theme-color" content="#000000" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="description" content="KHUTTZZ x OutKasts. Open 7 days a week. 505 Highway 7 Unit B60, Thornhill." />
@@ -14,27 +15,13 @@
     :root { --red:#e10600; --ink:#f3eee6; --mute:#9a948b; --gold:#fbbc04; }
     * { box-sizing:border-box; margin:0; padding:0; }
     html,body { width:100%; overflow-x:hidden; background:#000; color:var(--ink); }
-    body { font-family:Outfit,system-ui,sans-serif; padding-bottom:calc(70px + env(safe-area-inset-bottom)); }
-    img,video { display:block; width:100%; }
+    body { font-family:Outfit,system-ui,sans-serif; }
+    img { display:block; }
     a { color:inherit; text-decoration:none; }
-    img[broken],video[broken] { display:none !important; }
+    img[broken] { display:none !important; }
 
-    .wall {
-      position:fixed; inset:0; z-index:0;
-      display:grid; grid-template-columns:1fr 1fr;
-    }
-    .wall video { height:25vh; object-fit:cover; }
-    @media (min-width:700px) {
-      .wall { grid-template-columns:repeat(4,1fr); }
-      .wall video { height:50vh; }
-    }
-    .shade {
-      position:fixed; inset:0; z-index:1; pointer-events:none;
-      background:rgba(0,0,0,.55);
-    }
-    .wrap { position:relative; z-index:2; background:transparent; }
-    .block, .bar, .hours, .pin, .menu a, .quotes article, .gbox, .pair article, .cuts { background:#000; }
-    .pair article { background:#0a0a0a; }
+    .wrap { position:relative; z-index:2; background:#000; }
+    .block, .bar, .hours, .pin, .menu a, .quotes article, .gbox { background:#000; }
 
     .top {
       position:sticky; top:0; z-index:20;
@@ -46,7 +33,6 @@
     .top nav { display:flex; gap:14px; }
     .top nav a { font-family:Oswald,sans-serif; letter-spacing:.12em; text-transform:uppercase; font-size:.7rem; }
 
-    .hero img { width:100%; height:58vh; min-height:320px; object-fit:cover; }
     .bar {
       padding:16px 12px; background:#000; border-bottom:3px solid var(--red);
     }
@@ -59,27 +45,11 @@
       letter-spacing:.1em; text-transform:uppercase; font-size:.72rem; color:#ccc;
     }
 
-    .pair { display:grid; grid-template-columns:1fr 1fr; gap:3px; }
-    .pair img { height:62vw; object-fit:cover; }
-    .pair p {
-      padding:10px 10px 14px; background:#0a0a0a; border-top:3px solid var(--red);
-      font-family:"Bebas Neue",sans-serif; font-size:1.6rem; letter-spacing:.04em;
-    }
-
     .block { padding:26px 12px; }
     .kicker { font-family:Oswald,sans-serif; letter-spacing:.18em; text-transform:uppercase; color:var(--red); font-size:.68rem; margin-bottom:6px; }
     h2 { font-family:"Bebas Neue",sans-serif; font-size:clamp(2.2rem,11vw,4.2rem); line-height:.88; font-weight:400; text-transform:uppercase; }
 
-    .cuts { display:grid; grid-template-columns:1fr 1fr; gap:3px; }
-    .cuts img { height:46vw; object-fit:cover; }
-    .cuts .wide { grid-column:span 2; }
-    .cuts .wide img { height:58vw; }
     @media (min-width:800px) {
-      .cuts { grid-template-columns:repeat(3,1fr); }
-      .cuts img, .cuts .wide img { height:26vw; }
-      .cuts .wide { grid-column:span 2; }
-      .pair img { height:38vw; }
-      .hero img { height:70vh; }
       .brand { height:52px; }
     }
 
@@ -117,22 +87,9 @@
     .pin span { display:block; font-family:Oswald,sans-serif; letter-spacing:.14em; text-transform:uppercase; color:var(--red); font-size:.68rem; }
     .map iframe { width:100%; height:280px; border:0; }
 
-    .dock {
-      position:fixed; left:0; right:0; bottom:0; z-index:20;
-      display:flex; gap:8px;
-      padding:10px 12px calc(10px + env(safe-area-inset-bottom));
-      background:#000; border-top:3px solid var(--red);
-    }
-    .dock a {
-      flex:1; min-height:48px; display:grid; place-items:center;
-      font-family:Oswald,sans-serif; letter-spacing:.14em; text-transform:uppercase;
-    }
-    .go { background:var(--red); color:#fff; }
-    .ghost { border:1px solid #fff; }
-
     .gfloat {
       position:fixed; z-index:30; right:12px;
-      bottom:calc(78px + env(safe-area-inset-bottom));
+      bottom:calc(16px + env(safe-area-inset-bottom));
       display:flex; align-items:center; gap:8px;
       background:#fff; color:#111; padding:8px 10px 8px 8px;
     }
@@ -142,27 +99,14 @@
     .gfloat small { color:#444; font-size:.64rem; }
 
     @media (min-width:860px) {
-      .dock { display:none; }
-      body { padding-bottom:0; }
       .gfloat { bottom:18px; right:18px; }
     }
   </style>
 </head>
 <body>
-  <div class="wall" aria-hidden="true">
-    <video src="https://litter.catbox.moe/cfo149.mp4" muted autoplay loop playsinline preload="metadata"></video>
-    <video src="https://litter.catbox.moe/54lyvd.mp4" muted autoplay loop playsinline preload="metadata"></video>
-    <video src="https://litter.catbox.moe/b83do5.mp4" muted autoplay loop playsinline preload="metadata"></video>
-    <video src="https://litter.catbox.moe/eoz955.mp4" muted autoplay loop playsinline preload="metadata"></video>
-    <video src="https://litter.catbox.moe/suy4uv.mp4" muted autoplay loop playsinline preload="metadata"></video>
-    <video src="https://litter.catbox.moe/kaxnzs.mp4" muted autoplay loop playsinline preload="metadata"></video>
-    <video src="https://litter.catbox.moe/lvbzpz.mp4" muted autoplay loop playsinline preload="metadata"></video>
-    <video src="https://litter.catbox.moe/vazu9y.mp4" muted autoplay loop playsinline preload="metadata"></video>
-  </div>
-  <div class="shade"></div>
   <div class="wrap">
   <header class="top">
-    <img class="brand" src="https://litter.catbox.moe/zhkhvf.jpg" width="200" height="89" alt="KHUTTZZ x OutKasts" />
+    <img class="brand" src="assets/collab.jpg" width="200" height="89" alt="KHUTTZZ x OutKasts" />
     <nav>
       <a href="#menu">Menu</a>
       <a href="#reviews">Reviews</a>
@@ -170,38 +114,10 @@
     </nav>
   </header>
 
-  <section class="hero">
-    <img src="https://litter.catbox.moe/3a7qs0.jpg" width="1200" height="800" alt="The shop together" />
-  </section>
   <section class="bar">
     <strong>Open 7 days a week</strong>
     <span>505 Highway 7 Unit B60 · Thornhill</span>
   </section>
-
-  <div class="pair">
-    <article>
-      <img src="https://litter.catbox.moe/3q58f2.jpg" width="800" height="1000" alt="Khai" />
-      <p>Khai</p>
-    </article>
-    <article>
-      <img src="https://litter.catbox.moe/boy50g.jpg" width="800" height="1000" alt="KC" />
-      <p>KC</p>
-    </article>
-  </div>
-
-  <section class="block" id="work">
-    <p class="kicker">The work</p>
-    <h2>Cuts from the shop.</h2>
-  </section>
-  <div class="cuts">
-    <figure class="wide"><img src="https://litter.catbox.moe/3a7qs0.jpg" alt="The shop together" /></figure>
-    <img src="https://litter.catbox.moe/8rywkx.jpg" alt="OutKasts cut" />
-    <img src="https://litter.catbox.moe/6r40vm.jpg" alt="Fade and beard" />
-    <img src="https://litter.catbox.moe/pqj1eu.jpg" alt="High fade" />
-    <img src="https://litter.catbox.moe/ig5qd7.jpg" alt="Drop fade" />
-    <img src="https://litter.catbox.moe/741shk.jpg" alt="Skin fade" />
-    <img src="https://litter.catbox.moe/3q58f2.jpg" alt="Khai at the chair" />
-  </div>
 
   <section class="block" id="menu">
     <p class="kicker">The menu</p>
@@ -283,14 +199,9 @@
     </span>
   </a>
 
-  <div class="dock">
-    <a class="ghost" href="tel:+19057716221">Call</a>
-    <a class="go" href="#book">Book</a>
-  </div>
-
   </div>
   <script>
-    document.querySelectorAll("img,video").forEach(function (el) {
+    document.querySelectorAll("img").forEach(function (el) {
       el.addEventListener("error", function () { el.setAttribute("broken", ""); });
     });
   </script>
