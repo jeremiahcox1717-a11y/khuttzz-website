@@ -16,24 +16,11 @@
     * { box-sizing:border-box; margin:0; padding:0; }
     html,body { width:100%; overflow-x:hidden; background:#000; color:var(--ink); }
     body { font-family:Outfit,system-ui,sans-serif; }
-    img,video { display:block; width:100%; }
+    img { display:block; }
     a { color:inherit; text-decoration:none; }
-    img[broken],video[broken] { display:none !important; }
+    img[broken] { display:none !important; }
 
-    .wall {
-      position:fixed; inset:0; z-index:0;
-      display:grid; grid-template-columns:1fr 1fr;
-    }
-    .wall video { height:25vh; object-fit:cover; }
-    @media (min-width:700px) {
-      .wall { grid-template-columns:repeat(4,1fr); }
-      .wall video { height:50vh; }
-    }
-    .shade {
-      position:fixed; inset:0; z-index:1; pointer-events:none;
-      background:rgba(0,0,0,.55);
-    }
-    .wrap { position:relative; z-index:2; background:transparent; }
+    .wrap { position:relative; z-index:2; background:#000; }
     .block, .bar, .hours, .pin, .menu a, .quotes article, .gbox { background:#000; }
 
     .top {
@@ -46,9 +33,6 @@
     .top nav { display:flex; gap:14px; }
     .top nav a { font-family:Oswald,sans-serif; letter-spacing:.12em; text-transform:uppercase; font-size:.7rem; }
 
-    .hero {
-      height:46vh; min-height:220px; background:transparent;
-    }
     .bar {
       padding:16px 12px; background:#000; border-bottom:3px solid var(--red);
     }
@@ -66,7 +50,6 @@
     h2 { font-family:"Bebas Neue",sans-serif; font-size:clamp(2.2rem,11vw,4.2rem); line-height:.88; font-weight:400; text-transform:uppercase; }
 
     @media (min-width:800px) {
-      .hero { height:58vh; }
       .brand { height:52px; }
     }
 
@@ -121,17 +104,6 @@
   </style>
 </head>
 <body>
-  <div class="wall" aria-hidden="true">
-    <video src="https://litter.catbox.moe/cfo149.mp4" muted autoplay loop playsinline preload="metadata"></video>
-    <video src="https://litter.catbox.moe/54lyvd.mp4" muted autoplay loop playsinline preload="metadata"></video>
-    <video src="https://litter.catbox.moe/b83do5.mp4" muted autoplay loop playsinline preload="metadata"></video>
-    <video src="https://litter.catbox.moe/eoz955.mp4" muted autoplay loop playsinline preload="metadata"></video>
-    <video src="https://litter.catbox.moe/suy4uv.mp4" muted autoplay loop playsinline preload="metadata"></video>
-    <video src="https://litter.catbox.moe/kaxnzs.mp4" muted autoplay loop playsinline preload="metadata"></video>
-    <video src="https://litter.catbox.moe/lvbzpz.mp4" muted autoplay loop playsinline preload="metadata"></video>
-    <video src="https://litter.catbox.moe/vazu9y.mp4" muted autoplay loop playsinline preload="metadata"></video>
-  </div>
-  <div class="shade"></div>
   <div class="wrap">
   <header class="top">
     <img class="brand" src="assets/collab.jpg" width="200" height="89" alt="KHUTTZZ x OutKasts" />
@@ -142,7 +114,6 @@
     </nav>
   </header>
 
-  <section class="hero" aria-hidden="true"></section>
   <section class="bar">
     <strong>Open 7 days a week</strong>
     <span>505 Highway 7 Unit B60 · Thornhill</span>
@@ -230,7 +201,7 @@
 
   </div>
   <script>
-    document.querySelectorAll("img,video").forEach(function (el) {
+    document.querySelectorAll("img").forEach(function (el) {
       el.addEventListener("error", function () { el.setAttribute("broken", ""); });
     });
   </script>
