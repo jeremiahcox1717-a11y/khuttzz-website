@@ -17,28 +17,60 @@
     html,body { width:100%; overflow-x:hidden; background:#000; color:var(--ink); }
     body { font-family:Outfit,system-ui,sans-serif; }
     img { display:block; }
-    video { display:block; width:100%; }
     a { color:inherit; text-decoration:none; }
-    img[broken],video[broken] { display:none !important; }
+    img[broken] { display:none !important; }
+
+    video::-webkit-media-controls,
+    video::-webkit-media-controls-enclosure,
+    video::-webkit-media-controls-panel,
+    video::-webkit-media-controls-overlay-play-button,
+    video::-webkit-media-controls-start-playback-button,
+    video::-webkit-media-controls-overlay-enclosure {
+      display:none !important;
+      opacity:0 !important;
+      pointer-events:none !important;
+      -webkit-appearance:none;
+      width:0 !important;
+      height:0 !important;
+    }
 
     .wall {
       position:fixed; inset:0; z-index:0;
       display:grid;
       grid-template-columns:1fr 1fr;
-      grid-template-rows:repeat(4,1fr);
+      grid-template-rows:1fr 1fr;
       width:100%; height:100%;
+      pointer-events:none;
+      transform:translateZ(0);
+      -webkit-transform:translateZ(0);
     }
-    .wall video {
+    .cell {
+      position:relative;
+      overflow:hidden;
+      background:#000;
+    }
+    .cell video,
+    .cell img {
+      position:absolute; inset:0;
       width:100%; height:100%;
       object-fit:cover;
       pointer-events:none;
-      transition:opacity .25s ease;
     }
+    .cell img { z-index:1; }
+    .cell video { z-index:0; }
+    .cell.is-on img { opacity:0; }
+    .cell-cover {
+      position:absolute; inset:0; z-index:2;
+      background:transparent;
+      pointer-events:none;
+    }
+    .wall .cell:nth-child(n+5) { display:none; }
     @media (min-width:700px) {
       .wall {
         grid-template-columns:repeat(4,1fr);
         grid-template-rows:1fr 1fr;
       }
+      .wall .cell:nth-child(n+5) { display:block; }
     }
     .shade {
       position:fixed; inset:0; z-index:1; pointer-events:none;
@@ -202,14 +234,46 @@
 </head>
 <body>
   <div class="wall" aria-hidden="true">
-    <video src="assets/reels/1.mp4" muted autoplay playsinline webkit-playsinline preload="auto"></video>
-    <video src="assets/reels/2.mp4" muted autoplay playsinline webkit-playsinline preload="auto"></video>
-    <video src="assets/reels/3.mp4" muted autoplay playsinline webkit-playsinline preload="auto"></video>
-    <video src="assets/reels/4.mp4" muted autoplay playsinline webkit-playsinline preload="auto"></video>
-    <video src="assets/reels/5.mp4" muted autoplay playsinline webkit-playsinline preload="auto"></video>
-    <video src="assets/reels/6.mp4" muted autoplay playsinline webkit-playsinline preload="auto"></video>
-    <video src="assets/reels/7.mp4" muted autoplay playsinline webkit-playsinline preload="auto"></video>
-    <video src="assets/reels/8.mp4" muted autoplay playsinline webkit-playsinline preload="auto"></video>
+    <div class="cell">
+      <img alt="" src="assets/reels/1.jpg" />
+      <video muted autoplay loop playsinline webkit-playsinline preload="auto" disablepictureinpicture controlslist="nodownload nofullscreen noremoteplayback"></video>
+      <span class="cell-cover"></span>
+    </div>
+    <div class="cell">
+      <img alt="" src="assets/reels/2.jpg" />
+      <video muted autoplay loop playsinline webkit-playsinline preload="auto" disablepictureinpicture controlslist="nodownload nofullscreen noremoteplayback"></video>
+      <span class="cell-cover"></span>
+    </div>
+    <div class="cell">
+      <img alt="" src="assets/reels/3.jpg" />
+      <video muted autoplay loop playsinline webkit-playsinline preload="auto" disablepictureinpicture controlslist="nodownload nofullscreen noremoteplayback"></video>
+      <span class="cell-cover"></span>
+    </div>
+    <div class="cell">
+      <img alt="" src="assets/reels/4.jpg" />
+      <video muted autoplay loop playsinline webkit-playsinline preload="auto" disablepictureinpicture controlslist="nodownload nofullscreen noremoteplayback"></video>
+      <span class="cell-cover"></span>
+    </div>
+    <div class="cell">
+      <img alt="" src="assets/reels/5.jpg" />
+      <video muted autoplay loop playsinline webkit-playsinline preload="auto" disablepictureinpicture controlslist="nodownload nofullscreen noremoteplayback"></video>
+      <span class="cell-cover"></span>
+    </div>
+    <div class="cell">
+      <img alt="" src="assets/reels/7.jpg" />
+      <video muted autoplay loop playsinline webkit-playsinline preload="auto" disablepictureinpicture controlslist="nodownload nofullscreen noremoteplayback"></video>
+      <span class="cell-cover"></span>
+    </div>
+    <div class="cell">
+      <img alt="" src="assets/reels/8.jpg" />
+      <video muted autoplay loop playsinline webkit-playsinline preload="auto" disablepictureinpicture controlslist="nodownload nofullscreen noremoteplayback"></video>
+      <span class="cell-cover"></span>
+    </div>
+    <div class="cell">
+      <img alt="" src="assets/reels/2.jpg" />
+      <video muted autoplay loop playsinline webkit-playsinline preload="auto" disablepictureinpicture controlslist="nodownload nofullscreen noremoteplayback"></video>
+      <span class="cell-cover"></span>
+    </div>
   </div>
   <div class="shade"></div>
   <div class="wrap">
@@ -331,27 +395,25 @@
   <script>
     (function () {
       var REELS = [
-        "assets/reels/1.mp4",
-        "assets/reels/2.mp4",
-        "assets/reels/3.mp4",
-        "assets/reels/4.mp4",
-        "assets/reels/5.mp4",
-        "assets/reels/6.mp4",
-        "assets/reels/7.mp4",
-        "assets/reels/8.mp4"
+        { src: "assets/reels/1.mp4", poster: "assets/reels/1.jpg" },
+        { src: "assets/reels/2.mp4", poster: "assets/reels/2.jpg" },
+        { src: "assets/reels/3.mp4", poster: "assets/reels/3.jpg" },
+        { src: "assets/reels/4.mp4", poster: "assets/reels/4.jpg" },
+        { src: "assets/reels/5.mp4", poster: "assets/reels/5.jpg" },
+        { src: "assets/reels/7.mp4", poster: "assets/reels/7.jpg" },
+        { src: "assets/reels/8.mp4", poster: "assets/reels/8.jpg" }
       ];
-      var videos = document.querySelectorAll(".wall video");
+      var cells = document.querySelectorAll(".wall .cell");
       var slots = [];
 
-      function playSafe(v) {
-        v.muted = true;
-        v.playsInline = true;
-        var p = v.play();
-        if (p && p.catch) p.catch(function () {});
+      function liveSlots() {
+        return slots.filter(function (s) {
+          return window.getComputedStyle(s.cell).display !== "none";
+        });
       }
 
       function nextUnused(from) {
-        var used = slots.map(function (s) { return s.idx; });
+        var used = liveSlots().map(function (s) { return s.idx; });
         for (var step = 1; step <= REELS.length; step++) {
           var n = (from + step) % REELS.length;
           if (used.indexOf(n) === -1) return n;
@@ -359,55 +421,82 @@
         return (from + 1) % REELS.length;
       }
 
-      Array.prototype.forEach.call(videos, function (v, slot) {
-        var state = { v: v, idx: slot, plays: 0, armed: true };
-        slots.push(state);
-        v.loop = false;
-        v.removeAttribute("loop");
+      function prep(v) {
         v.muted = true;
+        v.defaultMuted = true;
+        v.autoplay = true;
+        v.loop = true;
+        v.controls = false;
         v.playsInline = true;
+        v.setAttribute("playsinline", "");
+        v.setAttribute("webkit-playsinline", "");
+        v.setAttribute("muted", "");
+        v.disablePictureInPicture = true;
+      }
 
-        function finishOnce() {
-          if (!state.armed) return;
-          state.armed = false;
-          state.plays += 1;
-          if (state.plays < 2) {
-            try { v.currentTime = 0.05; } catch (e) {}
-            playSafe(v);
-            setTimeout(function () { state.armed = true; }, 500);
-            return;
-          }
-          state.plays = 0;
-          state.idx = nextUnused(state.idx);
-          v.style.opacity = "0";
-          setTimeout(function () {
-            v.src = REELS[state.idx];
-            v.load();
-            playSafe(v);
-            setTimeout(function () { state.armed = true; }, 500);
-          }, 160);
+      function playSafe(v) {
+        prep(v);
+        var p = v.play();
+        if (p && p.catch) p.catch(function () {});
+      }
+
+      Array.prototype.forEach.call(cells, function (cell, slot) {
+        var v = cell.querySelector("video");
+        var poster = cell.querySelector("img");
+        var start = slot % REELS.length;
+        var state = { cell: cell, v: v, poster: poster, idx: start, plays: 0, lastT: 0, lock: false };
+        slots.push(state);
+        prep(v);
+
+        function show(i) {
+          state.idx = i;
+          poster.src = REELS[i].poster;
+          cell.classList.remove("is-on");
+          v.src = REELS[i].src;
+          v.load();
+          playSafe(v);
         }
 
         v.addEventListener("playing", function () {
-          v.style.opacity = "1";
+          cell.classList.add("is-on");
         });
-        v.addEventListener("timeupdate", function () {
-          if (!v.duration || v.currentTime < v.duration - 0.12) return;
-          finishOnce();
+        v.addEventListener("pause", function () {
+          if (document.hidden) return;
+          playSafe(v);
         });
-        v.addEventListener("ended", finishOnce);
 
-        playSafe(v);
+        v.addEventListener("timeupdate", function () {
+          if (state.lock) return;
+          var t = v.currentTime || 0;
+          if (state.lastT > 1.4 && t < 0.45) {
+            state.plays += 1;
+            if (state.plays >= 2) {
+              state.plays = 0;
+              state.lock = true;
+              show(nextUnused(state.idx));
+              setTimeout(function () { state.lock = false; state.lastT = 0; }, 700);
+            }
+          }
+          state.lastT = t;
+        });
+
+        show(start);
       });
 
-      function playWall() {
-        Array.prototype.forEach.call(videos, playSafe);
+      function playLive() {
+        liveSlots().forEach(function (s) { playSafe(s.v); });
       }
-      document.addEventListener("DOMContentLoaded", playWall);
-      window.addEventListener("load", playWall);
-      document.addEventListener("touchstart", playWall, { once: true });
-      document.addEventListener("click", playWall, { once: true });
+      document.addEventListener("DOMContentLoaded", playLive);
+      window.addEventListener("load", playLive);
+      window.addEventListener("pageshow", playLive);
+      window.addEventListener("focus", playLive);
+      document.addEventListener("visibilitychange", function () {
+        if (!document.hidden) playLive();
+      });
+      document.addEventListener("touchstart", playLive, { passive: true });
+      document.addEventListener("click", playLive);
       document.querySelectorAll("img").forEach(function (el) {
+        if (el.closest(".wall")) return;
         el.addEventListener("error", function () { el.remove(); });
       });
     })();
