@@ -15,7 +15,7 @@
     :root { --red:#e10600; --ink:#f3eee6; --mute:#9a948b; --gold:#fbbc04; }
     * { box-sizing:border-box; margin:0; padding:0; }
     html,body { width:100%; overflow-x:hidden; background:#000; color:var(--ink); }
-    body { font-family:Outfit,system-ui,sans-serif; padding-bottom:calc(70px + env(safe-area-inset-bottom)); }
+    body { font-family:Outfit,system-ui,sans-serif; }
     img,video { display:block; width:100%; }
     a { color:inherit; text-decoration:none; }
     img[broken],video[broken] { display:none !important; }
@@ -104,22 +104,9 @@
     .pin span { display:block; font-family:Oswald,sans-serif; letter-spacing:.14em; text-transform:uppercase; color:var(--red); font-size:.68rem; }
     .map iframe { width:100%; height:280px; border:0; }
 
-    .dock {
-      position:fixed; left:0; right:0; bottom:0; z-index:20;
-      display:flex; gap:8px;
-      padding:10px 12px calc(10px + env(safe-area-inset-bottom));
-      background:#000; border-top:3px solid var(--red);
-    }
-    .dock a {
-      flex:1; min-height:48px; display:grid; place-items:center;
-      font-family:Oswald,sans-serif; letter-spacing:.14em; text-transform:uppercase;
-    }
-    .go { background:var(--red); color:#fff; }
-    .ghost { border:1px solid #fff; }
-
     .gfloat {
       position:fixed; z-index:30; right:12px;
-      bottom:calc(78px + env(safe-area-inset-bottom));
+      bottom:calc(16px + env(safe-area-inset-bottom));
       display:flex; align-items:center; gap:8px;
       background:#fff; color:#111; padding:8px 10px 8px 8px;
     }
@@ -129,8 +116,6 @@
     .gfloat small { color:#444; font-size:.64rem; }
 
     @media (min-width:860px) {
-      .dock { display:none; }
-      body { padding-bottom:0; }
       .gfloat { bottom:18px; right:18px; }
     }
   </style>
@@ -242,11 +227,6 @@
       <small>Leave a review</small>
     </span>
   </a>
-
-  <div class="dock">
-    <a class="ghost" href="tel:+19057716221">Call</a>
-    <a class="go" href="#book">Book</a>
-  </div>
 
   </div>
   <script>
