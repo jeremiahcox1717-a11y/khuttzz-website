@@ -64,14 +64,6 @@
       background:transparent;
       pointer-events:none;
     }
-    .wall .cell:nth-child(n+5) { display:none; }
-    @media (min-width:700px) {
-      .wall {
-        grid-template-columns:repeat(4,1fr);
-        grid-template-rows:1fr 1fr;
-      }
-      .wall .cell:nth-child(n+5) { display:block; }
-    }
     .shade {
       position:fixed; inset:0; z-index:1; pointer-events:none;
       background:rgba(0,0,0,.45);
@@ -245,32 +237,12 @@
       <span class="cell-cover"></span>
     </div>
     <div class="cell">
-      <img alt="" src="assets/reels/3.jpg" />
-      <video muted autoplay loop playsinline webkit-playsinline preload="auto" disablepictureinpicture controlslist="nodownload nofullscreen noremoteplayback"></video>
-      <span class="cell-cover"></span>
-    </div>
-    <div class="cell">
-      <img alt="" src="assets/reels/4.jpg" />
-      <video muted autoplay loop playsinline webkit-playsinline preload="auto" disablepictureinpicture controlslist="nodownload nofullscreen noremoteplayback"></video>
-      <span class="cell-cover"></span>
-    </div>
-    <div class="cell">
       <img alt="" src="assets/reels/5.jpg" />
       <video muted autoplay loop playsinline webkit-playsinline preload="auto" disablepictureinpicture controlslist="nodownload nofullscreen noremoteplayback"></video>
       <span class="cell-cover"></span>
     </div>
     <div class="cell">
       <img alt="" src="assets/reels/7.jpg" />
-      <video muted autoplay loop playsinline webkit-playsinline preload="auto" disablepictureinpicture controlslist="nodownload nofullscreen noremoteplayback"></video>
-      <span class="cell-cover"></span>
-    </div>
-    <div class="cell">
-      <img alt="" src="assets/reels/8.jpg" />
-      <video muted autoplay loop playsinline webkit-playsinline preload="auto" disablepictureinpicture controlslist="nodownload nofullscreen noremoteplayback"></video>
-      <span class="cell-cover"></span>
-    </div>
-    <div class="cell">
-      <img alt="" src="assets/reels/2.jpg" />
       <video muted autoplay loop playsinline webkit-playsinline preload="auto" disablepictureinpicture controlslist="nodownload nofullscreen noremoteplayback"></video>
       <span class="cell-cover"></span>
     </div>
@@ -405,20 +377,25 @@
       ];
       var cells = document.querySelectorAll(".wall .cell");
       var slots = [];
+      var lastShown = REELS.map(function () { return -1e12; });
+      var COOLDOWN = 180000;
+      var START = [0, 1, 4, 5];
 
-      function liveSlots() {
-        return slots.filter(function (s) {
-          return window.getComputedStyle(s.cell).display !== "none";
-        });
-      }
-
-      function nextUnused(from) {
-        var used = liveSlots().map(function (s) { return s.idx; });
+      function nextFresh(from) {
+        var now = Date.now();
+        var showing = slots.map(function (s) { return s.idx; });
+        var best = -1;
+        var bestTime = now;
         for (var step = 1; step <= REELS.length; step++) {
           var n = (from + step) % REELS.length;
-          if (used.indexOf(n) === -1) return n;
+          if (showing.indexOf(n) !== -1) continue;
+          if (now - lastShown[n] < COOLDOWN) continue;
+          if (lastShown[n] < bestTime) {
+            bestTime = lastShown[n];
+            best = n;
+          }
         }
-        return (from + 1) % REELS.length;
+        return best;
       }
 
       function prep(v) {
@@ -443,13 +420,14 @@
       Array.prototype.forEach.call(cells, function (cell, slot) {
         var v = cell.querySelector("video");
         var poster = cell.querySelector("img");
-        var start = slot % REELS.length;
+        var start = START[slot] != null ? START[slot] : slot;
         var state = { cell: cell, v: v, poster: poster, idx: start, plays: 0, lastT: 0, lock: false };
         slots.push(state);
         prep(v);
 
         function show(i) {
           state.idx = i;
+          lastShown[i] = Date.now();
           poster.src = REELS[i].poster;
           cell.classList.remove("is-on");
           v.src = REELS[i].src;
@@ -471,10 +449,15 @@
           if (state.lastT > 1.4 && t < 0.45) {
             state.plays += 1;
             if (state.plays >= 2) {
-              state.plays = 0;
-              state.lock = true;
-              show(nextUnused(state.idx));
-              setTimeout(function () { state.lock = false; state.lastT = 0; }, 700);
+              var nxt = nextFresh(state.idx);
+              if (nxt < 0) {
+                state.plays = 0;
+              } else {
+                state.plays = 0;
+                state.lock = true;
+                show(nxt);
+                setTimeout(function () { state.lock = false; state.lastT = 0; }, 700);
+              }
             }
           }
           state.lastT = t;
@@ -484,7 +467,7 @@
       });
 
       function playLive() {
-        liveSlots().forEach(function (s) { playSafe(s.v); });
+        slots.forEach(function (s) { playSafe(s.v); });
       }
       document.addEventListener("DOMContentLoaded", playLive);
       window.addEventListener("load", playLive);
