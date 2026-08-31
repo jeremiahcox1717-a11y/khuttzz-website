@@ -20,14 +20,10 @@
       padding:calc(8px + env(safe-area-inset-top)) 12px 8px;
       background:#000; border-bottom:3px solid #e10600;
     }
-    .brand-lockup {
-      display:flex; align-items:baseline; gap:.28em;
-      min-width:0; max-width:70vw;
-      font-family:"Bebas Neue",sans-serif;
-      font-size:clamp(1.35rem,4.8vw,2.1rem);
-      letter-spacing:.06em; color:#fff; line-height:1; white-space:nowrap;
+    .brand {
+      height:48px; width:auto; max-width:min(58vw, 300px);
+      object-fit:contain; object-position:left center;
     }
-    .brand-lockup em { font-style:normal; font-family:"Bebas Neue",sans-serif; color:#fff; }
     .top nav a {
       font-family:Oswald,sans-serif; letter-spacing:.12em; text-transform:uppercase; font-size:.7rem;
     }
@@ -44,16 +40,17 @@
     .gfloat {
       position:fixed; z-index:30; right:14px;
       bottom:calc(16px + env(safe-area-inset-bottom));
-      width:68px; height:68px;
+      width:104px; height:104px;
       display:grid; place-items:center;
-      background:#fff; border-radius:10px; overflow:hidden;
-      box-shadow:0 10px 28px rgba(0,0,0,.45);
+      background:#fff; border-radius:14px; overflow:hidden;
+      box-shadow:0 12px 32px rgba(0,0,0,.5);
+      padding:0 0 16px;
     }
-    .gfloat svg { width:28px; height:28px; }
+    .gfloat svg { width:48px; height:48px; }
     .gfloat::after {
       content:"5.0";
-      position:absolute; bottom:7px;
-      font-family:Oswald,sans-serif; font-size:.52rem; letter-spacing:.08em; color:#111;
+      position:absolute; bottom:12px;
+      font-family:Oswald,sans-serif; font-size:.78rem; letter-spacing:.1em; color:#111;
     }
   </style>
   <script>
@@ -62,10 +59,8 @@
 </head>
 <body>
   <header class="top">
-    <a class="brand-lockup" href="index.html" aria-label="KHUTTZZ x OutKasts">
-      <span>KHUTTZZ</span>
-      <em>x</em>
-      <span>OUTKASTS</span>
+    <a href="index.html">
+      <img class="brand" src="assets/collab.jpg" width="200" height="89" alt="KHUTTZZ x OutKasts" onerror="this.remove()" />
     </a>
     <nav>
       <a href="index.html">Home</a>

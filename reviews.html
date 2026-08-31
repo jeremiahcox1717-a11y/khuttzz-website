@@ -24,15 +24,11 @@
       padding:calc(8px + env(safe-area-inset-top)) 14px 8px;
       background:#000; border-bottom:3px solid var(--red);
     }
-    .brand-lockup {
-      display:flex; align-items:baseline; gap:.28em;
-      min-width:0; max-width:70vw;
-      font-family:"Bebas Neue",sans-serif;
-      font-size:clamp(1.3rem,4.6vw,2rem);
-      letter-spacing:.06em; color:#fff; line-height:1; white-space:nowrap;
+    .brand {
+      height:44px; width:auto; max-width:min(58vw, 300px);
+      object-fit:contain; object-position:left center;
     }
-    .brand-lockup em { font-style:normal; font-family:"Bebas Neue",sans-serif; color:#fff; }
-    .top > a:not(.brand-lockup) { font-family:Oswald,sans-serif; letter-spacing:.12em; text-transform:uppercase; font-size:.72rem; }
+    .top > a:not(:has(img)) { font-family:Oswald,sans-serif; letter-spacing:.12em; text-transform:uppercase; font-size:.72rem; }
 
     .hero {
       min-height:70svh; display:grid; place-items:center; text-align:center;
@@ -62,28 +58,26 @@
 
     .gfloat {
       position:fixed; z-index:30; right:16px; bottom:calc(16px + env(safe-area-inset-bottom));
-      width:68px; height:68px; padding:0;
+      width:104px; height:104px; padding:0 0 16px;
       display:grid; place-items:center;
       background:#fff;
-      border-radius:10px;
+      border-radius:14px;
       overflow:hidden;
-      box-shadow:0 10px 30px rgba(0,0,0,.45);
+      box-shadow:0 12px 32px rgba(0,0,0,.5);
     }
-    .gfloat svg { width:28px; height:28px; }
+    .gfloat svg { width:48px; height:48px; }
     .gfloat span { display:none; }
     .gfloat::after {
       content:"5.0";
-      position:absolute; bottom:7px;
-      font-family:Oswald,sans-serif; font-size:.52rem; letter-spacing:.08em; color:#111;
+      position:absolute; bottom:12px;
+      font-family:Oswald,sans-serif; font-size:.78rem; letter-spacing:.1em; color:#111;
     }
   </style>
 </head>
 <body>
   <header class="top">
-    <a class="brand-lockup" href="index.html" aria-label="KHUTTZZ x OutKasts">
-      <span>KHUTTZZ</span>
-      <em>x</em>
-      <span>OUTKASTS</span>
+    <a href="index.html">
+      <img class="brand" src="assets/collab.jpg" width="200" height="89" alt="KHUTTZZ x OutKasts" onerror="this.remove()" />
     </a>
     <a href="index.html">Home</a>
   </header>
