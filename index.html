@@ -65,9 +65,49 @@
     }
 
     .hero {
+      position:relative;
       height:calc(100svh - 58px);
       min-height:340px;
       background:transparent;
+    }
+    .crew {
+      position:absolute;
+      left:12px;
+      bottom:16px;
+      z-index:6;
+      max-width:calc(100% - 140px);
+      padding:10px 12px 12px;
+      background:rgba(0,0,0,.78);
+      border-left:4px solid var(--red);
+    }
+    .crew > p {
+      font-family:Oswald,sans-serif;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      font-size:.62rem;
+      color:var(--red);
+      margin-bottom:8px;
+    }
+    .crew-row { display:flex; gap:10px; }
+    .crew figure { position:relative; width:86px; }
+    .crew img {
+      width:86px; height:108px;
+      object-fit:cover;
+    }
+    .crew figcaption {
+      position:absolute; left:0; right:0; bottom:0;
+      padding:16px 4px 6px;
+      background:linear-gradient(transparent, rgba(0,0,0,.88));
+      font-family:"Bebas Neue",sans-serif;
+      font-size:1.15rem;
+      letter-spacing:.04em;
+      text-align:center;
+    }
+    @media (min-width:800px) {
+      .crew { left:18px; bottom:22px; padding:12px 14px 14px; }
+      .crew figure { width:124px; }
+      .crew img { width:124px; height:156px; }
+      .crew figcaption { font-size:1.35rem; }
     }
     .bar {
       padding:16px 12px; background:#000; border-bottom:3px solid var(--red);
@@ -183,7 +223,21 @@
     </nav>
   </header>
 
-  <section class="hero" aria-hidden="true"></section>
+  <section class="hero">
+    <aside class="crew">
+      <p>Our Barbers</p>
+      <div class="crew-row">
+        <figure>
+          <img src="assets/khai.jpg" alt="Khai" />
+          <figcaption>Khai</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/kc.jpg" alt="KC" />
+          <figcaption>KC</figcaption>
+        </figure>
+      </div>
+    </aside>
+  </section>
   <section class="bar">
     <strong>Open 7 days a week</strong>
     <span>505 Highway 7 Unit B60 · Thornhill</span>
