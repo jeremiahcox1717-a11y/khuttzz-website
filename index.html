@@ -38,11 +38,17 @@
       position:fixed; inset:0; z-index:0;
       display:grid;
       grid-template-columns:1fr 1fr;
-      grid-template-rows:1fr 1fr;
+      grid-template-rows:repeat(4,1fr);
       width:100%; height:100%;
       pointer-events:none;
       transform:translateZ(0);
       -webkit-transform:translateZ(0);
+    }
+    @media (min-width:700px) {
+      .wall {
+        grid-template-columns:repeat(4,1fr);
+        grid-template-rows:1fr 1fr;
+      }
     }
     .cell {
       position:relative;
@@ -237,12 +243,32 @@
       <span class="cell-cover"></span>
     </div>
     <div class="cell">
+      <img alt="" src="assets/reels/3.jpg" />
+      <video muted autoplay loop playsinline webkit-playsinline preload="auto" disablepictureinpicture controlslist="nodownload nofullscreen noremoteplayback"></video>
+      <span class="cell-cover"></span>
+    </div>
+    <div class="cell">
+      <img alt="" src="assets/reels/4.jpg" />
+      <video muted autoplay loop playsinline webkit-playsinline preload="auto" disablepictureinpicture controlslist="nodownload nofullscreen noremoteplayback"></video>
+      <span class="cell-cover"></span>
+    </div>
+    <div class="cell">
       <img alt="" src="assets/reels/5.jpg" />
       <video muted autoplay loop playsinline webkit-playsinline preload="auto" disablepictureinpicture controlslist="nodownload nofullscreen noremoteplayback"></video>
       <span class="cell-cover"></span>
     </div>
     <div class="cell">
       <img alt="" src="assets/reels/7.jpg" />
+      <video muted autoplay loop playsinline webkit-playsinline preload="auto" disablepictureinpicture controlslist="nodownload nofullscreen noremoteplayback"></video>
+      <span class="cell-cover"></span>
+    </div>
+    <div class="cell">
+      <img alt="" src="assets/reels/8.jpg" />
+      <video muted autoplay loop playsinline webkit-playsinline preload="auto" disablepictureinpicture controlslist="nodownload nofullscreen noremoteplayback"></video>
+      <span class="cell-cover"></span>
+    </div>
+    <div class="cell">
+      <img alt="" src="assets/reels/9.jpg" />
       <video muted autoplay loop playsinline webkit-playsinline preload="auto" disablepictureinpicture controlslist="nodownload nofullscreen noremoteplayback"></video>
       <span class="cell-cover"></span>
     </div>
@@ -366,37 +392,21 @@
   </div>
   <script>
     (function () {
-      var REELS = [
-        { src: "assets/reels/1.mp4", poster: "assets/reels/1.jpg" },
-        { src: "assets/reels/2.mp4", poster: "assets/reels/2.jpg" },
-        { src: "assets/reels/3.mp4", poster: "assets/reels/3.jpg" },
-        { src: "assets/reels/4.mp4", poster: "assets/reels/4.jpg" },
-        { src: "assets/reels/5.mp4", poster: "assets/reels/5.jpg" },
-        { src: "assets/reels/7.mp4", poster: "assets/reels/7.jpg" },
-        { src: "assets/reels/8.mp4", poster: "assets/reels/8.jpg" }
+      function clip(n) {
+        return { src: "assets/reels/" + n + ".mp4", poster: "assets/reels/" + n + ".jpg" };
+      }
+      var PAIRS = [
+        [clip(1), clip(10)],
+        [clip(2), clip(11)],
+        [clip(3), clip(13)],
+        [clip(4), clip(18)],
+        [clip(5), clip(19)],
+        [clip(7), clip(21)],
+        [clip(8), clip(23)],
+        [clip(9), clip(24)]
       ];
       var cells = document.querySelectorAll(".wall .cell");
       var slots = [];
-      var lastShown = REELS.map(function () { return -1e12; });
-      var COOLDOWN = 180000;
-      var START = [0, 1, 4, 5];
-
-      function nextFresh(from) {
-        var now = Date.now();
-        var showing = slots.map(function (s) { return s.idx; });
-        var best = -1;
-        var bestTime = now;
-        for (var step = 1; step <= REELS.length; step++) {
-          var n = (from + step) % REELS.length;
-          if (showing.indexOf(n) !== -1) continue;
-          if (now - lastShown[n] < COOLDOWN) continue;
-          if (lastShown[n] < bestTime) {
-            bestTime = lastShown[n];
-            best = n;
-          }
-        }
-        return best;
-      }
 
       function prep(v) {
         v.muted = true;
@@ -418,19 +428,19 @@
       }
 
       Array.prototype.forEach.call(cells, function (cell, slot) {
+        var pair = PAIRS[slot];
+        if (!pair) return;
         var v = cell.querySelector("video");
         var poster = cell.querySelector("img");
-        var start = START[slot] != null ? START[slot] : slot;
-        var state = { cell: cell, v: v, poster: poster, idx: start, plays: 0, lastT: 0, lock: false };
+        var state = { cell: cell, v: v, poster: poster, which: 0, plays: 0, lastT: 0, lock: false };
         slots.push(state);
         prep(v);
 
-        function show(i) {
-          state.idx = i;
-          lastShown[i] = Date.now();
-          poster.src = REELS[i].poster;
+        function show() {
+          var clip = pair[state.which];
+          poster.src = clip.poster;
           cell.classList.remove("is-on");
-          v.src = REELS[i].src;
+          v.src = clip.src;
           v.load();
           playSafe(v);
         }
@@ -449,21 +459,17 @@
           if (state.lastT > 1.4 && t < 0.45) {
             state.plays += 1;
             if (state.plays >= 2) {
-              var nxt = nextFresh(state.idx);
-              if (nxt < 0) {
-                state.plays = 0;
-              } else {
-                state.plays = 0;
-                state.lock = true;
-                show(nxt);
-                setTimeout(function () { state.lock = false; state.lastT = 0; }, 700);
-              }
+              state.plays = 0;
+              state.lock = true;
+              state.which = state.which ? 0 : 1;
+              show();
+              setTimeout(function () { state.lock = false; state.lastT = 0; }, 700);
             }
           }
           state.lastT = t;
         });
 
-        show(start);
+        show();
       });
 
       function playLive() {
