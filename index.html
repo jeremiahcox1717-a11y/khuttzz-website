@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>KHUTTZZ x OutKasts | Thornhill</title>
+  <link rel="icon" href="assets/logo.png" />
   <meta name="theme-color" content="#000000" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="description" content="KHUTTZZ x OutKasts. Open 7 days a week. 505 Highway 7 Unit B60, Thornhill." />
@@ -33,8 +34,7 @@
       background:rgba(0,0,0,.55);
     }
     .wrap { position:relative; z-index:2; background:transparent; }
-    .block, .bar, .hours, .pin, .menu a, .quotes article, .gbox, .pair article, .cuts { background:#000; }
-    .pair article { background:#0a0a0a; }
+    .block, .bar, .hours, .pin, .menu a, .quotes article, .gbox { background:#000; }
 
     .top {
       position:sticky; top:0; z-index:20;
@@ -46,7 +46,9 @@
     .top nav { display:flex; gap:14px; }
     .top nav a { font-family:Oswald,sans-serif; letter-spacing:.12em; text-transform:uppercase; font-size:.7rem; }
 
-    .hero img { width:100%; height:58vh; min-height:320px; object-fit:cover; }
+    .hero {
+      height:46vh; min-height:220px; background:transparent;
+    }
     .bar {
       padding:16px 12px; background:#000; border-bottom:3px solid var(--red);
     }
@@ -59,27 +61,12 @@
       letter-spacing:.1em; text-transform:uppercase; font-size:.72rem; color:#ccc;
     }
 
-    .pair { display:grid; grid-template-columns:1fr 1fr; gap:3px; }
-    .pair img { height:62vw; object-fit:cover; }
-    .pair p {
-      padding:10px 10px 14px; background:#0a0a0a; border-top:3px solid var(--red);
-      font-family:"Bebas Neue",sans-serif; font-size:1.6rem; letter-spacing:.04em;
-    }
-
     .block { padding:26px 12px; }
     .kicker { font-family:Oswald,sans-serif; letter-spacing:.18em; text-transform:uppercase; color:var(--red); font-size:.68rem; margin-bottom:6px; }
     h2 { font-family:"Bebas Neue",sans-serif; font-size:clamp(2.2rem,11vw,4.2rem); line-height:.88; font-weight:400; text-transform:uppercase; }
 
-    .cuts { display:grid; grid-template-columns:1fr 1fr; gap:3px; }
-    .cuts img { height:46vw; object-fit:cover; }
-    .cuts .wide { grid-column:span 2; }
-    .cuts .wide img { height:58vw; }
     @media (min-width:800px) {
-      .cuts { grid-template-columns:repeat(3,1fr); }
-      .cuts img, .cuts .wide img { height:26vw; }
-      .cuts .wide { grid-column:span 2; }
-      .pair img { height:38vw; }
-      .hero img { height:70vh; }
+      .hero { height:58vh; }
       .brand { height:52px; }
     }
 
@@ -162,7 +149,7 @@
   <div class="shade"></div>
   <div class="wrap">
   <header class="top">
-    <img class="brand" src="https://litter.catbox.moe/zhkhvf.jpg" width="200" height="89" alt="KHUTTZZ x OutKasts" />
+    <img class="brand" src="assets/collab.jpg" width="200" height="89" alt="KHUTTZZ x OutKasts" />
     <nav>
       <a href="#menu">Menu</a>
       <a href="#reviews">Reviews</a>
@@ -170,38 +157,11 @@
     </nav>
   </header>
 
-  <section class="hero">
-    <img src="https://litter.catbox.moe/3a7qs0.jpg" width="1200" height="800" alt="The shop together" />
-  </section>
+  <section class="hero" aria-hidden="true"></section>
   <section class="bar">
     <strong>Open 7 days a week</strong>
     <span>505 Highway 7 Unit B60 · Thornhill</span>
   </section>
-
-  <div class="pair">
-    <article>
-      <img src="https://litter.catbox.moe/3q58f2.jpg" width="800" height="1000" alt="Khai" />
-      <p>Khai</p>
-    </article>
-    <article>
-      <img src="https://litter.catbox.moe/boy50g.jpg" width="800" height="1000" alt="KC" />
-      <p>KC</p>
-    </article>
-  </div>
-
-  <section class="block" id="work">
-    <p class="kicker">The work</p>
-    <h2>Cuts from the shop.</h2>
-  </section>
-  <div class="cuts">
-    <figure class="wide"><img src="https://litter.catbox.moe/3a7qs0.jpg" alt="The shop together" /></figure>
-    <img src="https://litter.catbox.moe/8rywkx.jpg" alt="OutKasts cut" />
-    <img src="https://litter.catbox.moe/6r40vm.jpg" alt="Fade and beard" />
-    <img src="https://litter.catbox.moe/pqj1eu.jpg" alt="High fade" />
-    <img src="https://litter.catbox.moe/ig5qd7.jpg" alt="Drop fade" />
-    <img src="https://litter.catbox.moe/741shk.jpg" alt="Skin fade" />
-    <img src="https://litter.catbox.moe/3q58f2.jpg" alt="Khai at the chair" />
-  </div>
 
   <section class="block" id="menu">
     <p class="kicker">The menu</p>
