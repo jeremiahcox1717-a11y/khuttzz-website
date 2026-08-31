@@ -46,12 +46,7 @@ button { font: inherit; color: inherit; }
   border-bottom: 2px solid var(--red);
   backdrop-filter: blur(16px);
 }
-.nav-brand img {
-  height: 42px;
-  width: auto;
-  filter: invert(1);
-  background: #f3eee6;
-}
+.nav-brand img { height: 42px; width: auto; }
 .nav-links {
   display: none;
   gap: 16px;
