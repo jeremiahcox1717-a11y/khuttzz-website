@@ -24,7 +24,13 @@
       padding:calc(8px + env(safe-area-inset-top)) 14px 8px;
       background:#000; border-bottom:3px solid var(--red);
     }
-    .top img { height:40px; width:auto; max-width:62vw; object-fit:contain; }
+    .brand-lockup { display:flex; align-items:center; gap:8px; min-width:0; max-width:70vw; }
+    .brand-k { height:38px; width:auto; max-width:32vw; object-fit:contain; }
+    .feat { display:flex; flex-direction:column; align-items:center; }
+    .feat small { font-family:Oswald,sans-serif; letter-spacing:.14em; text-transform:uppercase; font-size:.42rem; color:#9a948b; }
+    .feat b { font-family:Oswald,sans-serif; font-size:1.05rem; color:#fff; line-height:1; }
+    .brand-o { height:34px; width:auto; max-width:26vw; object-fit:contain; }
+    .top img { height:auto; }
     .top a { font-family:Oswald,sans-serif; letter-spacing:.12em; text-transform:uppercase; font-size:.72rem; }
 
     .hero {
@@ -57,7 +63,7 @@
       position:fixed; z-index:30; right:16px; bottom:calc(16px + env(safe-area-inset-bottom));
       width:68px; height:68px; padding:0;
       display:grid; place-items:center;
-      background:#fff; border-radius:50%;
+      border-radius:10px;
       box-shadow:0 10px 30px rgba(0,0,0,.45);
     }
     .gfloat svg { width:28px; height:28px; }
@@ -71,7 +77,11 @@
 </head>
 <body>
   <header class="top">
-    <img src="assets/collab.jpg" alt="KHUTTZZ x OutKasts" onerror="this.remove()" />
+    <a class="brand-lockup" href="index.html" aria-label="KHUTTZZ featuring OutKasts">
+      <img class="brand-k" src="assets/logo.png" alt="KHUTTZZ" onerror="this.remove()" />
+      <span class="feat"><small>featuring</small><b>×</b></span>
+      <img class="brand-o" src="assets/outkasts.png" alt="OutKasts Barbershop" onerror="this.remove()" />
+    </a>
     <a href="index.html">Home</a>
   </header>
 

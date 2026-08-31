@@ -17,24 +17,10 @@
     html,body { width:100%; overflow-x:hidden; background:#000; color:var(--ink); }
     body { font-family:Outfit,system-ui,sans-serif; }
     img { display:block; }
-    video { display:block; width:100%; }
     a { color:inherit; text-decoration:none; }
-    img[broken],video[broken] { display:none !important; }
+    img[broken] { display:none !important; }
 
-    .wall {
-      position:fixed; inset:0; z-index:0;
-      display:grid; grid-template-columns:1fr 1fr;
-    }
-    .wall video { height:25vh; object-fit:cover; }
-    @media (min-width:700px) {
-      .wall { grid-template-columns:repeat(4,1fr); }
-      .wall video { height:50vh; }
-    }
-    .shade {
-      position:fixed; inset:0; z-index:1; pointer-events:none;
-      background:rgba(0,0,0,.55);
-    }
-    .wrap { position:relative; z-index:2; background:transparent; }
+    .wrap { position:relative; z-index:2; background:#000; }
     .block, .bar, .hours, .pin, .menu a, .quotes article, .gbox { background:#000; }
 
     .top {
@@ -43,15 +29,40 @@
       padding:calc(8px + env(safe-area-inset-top)) 12px 8px;
       background:#000; border-bottom:3px solid var(--red);
     }
-    .brand { height:44px; width:auto; max-width:64vw; object-fit:contain; object-position:left center; }
-    .top nav { display:flex; gap:14px; }
+    .brand-lockup {
+      display:flex; align-items:center; gap:8px; min-width:0; max-width:70vw;
+    }
+    .brand-k { height:40px; width:auto; max-width:34vw; object-fit:contain; }
+    .feat {
+      display:flex; flex-direction:column; align-items:center; gap:1px; flex:none;
+    }
+    .feat small {
+      font-family:Oswald,sans-serif; letter-spacing:.14em; text-transform:uppercase;
+      font-size:.42rem; color:#9a948b;
+    }
+    .feat b {
+      font-family:Oswald,sans-serif; font-size:1.05rem; font-weight:600; color:#fff; line-height:1;
+    }
+    .brand-o { height:36px; width:auto; max-width:28vw; object-fit:contain; }
+    .top nav { display:flex; gap:14px; align-items:center; flex:none; }
+    .top nav a {
+      font-family:Oswald,sans-serif; letter-spacing:.12em; text-transform:uppercase; font-size:.7rem;
+    }
     .top nav a.book-here {
       background:var(--red); color:#fff; padding:8px 10px;
     }
 
-    .hero {
-      height:46vh; min-height:220px; background:transparent;
+    .shots {
+      position:relative;
+      height:48vh; min-height:240px;
+      overflow:hidden; background:#111;
     }
+    .shots img {
+      position:absolute; inset:0; width:100%; height:100%;
+      object-fit:cover; opacity:0;
+      transition:opacity .7s ease;
+    }
+    .shots img.is-on { opacity:1; }
     .bar {
       padding:16px 12px; background:#000; border-bottom:3px solid var(--red);
     }
@@ -69,8 +80,9 @@
     h2 { font-family:"Bebas Neue",sans-serif; font-size:clamp(2.2rem,11vw,4.2rem); line-height:.88; font-weight:400; text-transform:uppercase; }
 
     @media (min-width:800px) {
-      .hero { height:58vh; }
-      .brand { height:52px; }
+      .shots { height:62vh; }
+      .brand-k { height:48px; }
+      .brand-o { height:44px; }
     }
 
     .menu { display:grid; gap:3px; margin-top:14px; }
@@ -120,7 +132,7 @@
       width:68px; height:68px; padding:0; gap:0;
       display:grid; place-items:center;
       background:#fff; color:#111;
-      border-radius:50%;
+      border-radius:10px;
       overflow:hidden;
       box-shadow:0 10px 28px rgba(0,0,0,.45);
     }
@@ -142,20 +154,13 @@
   </style>
 </head>
 <body>
-  <div class="wall" aria-hidden="true">
-    <video src="https://litter.catbox.moe/cfo149.mp4" muted autoplay loop playsinline preload="metadata"></video>
-    <video src="https://litter.catbox.moe/54lyvd.mp4" muted autoplay loop playsinline preload="metadata"></video>
-    <video src="https://litter.catbox.moe/b83do5.mp4" muted autoplay loop playsinline preload="metadata"></video>
-    <video src="https://litter.catbox.moe/eoz955.mp4" muted autoplay loop playsinline preload="metadata"></video>
-    <video src="https://litter.catbox.moe/suy4uv.mp4" muted autoplay loop playsinline preload="metadata"></video>
-    <video src="https://litter.catbox.moe/kaxnzs.mp4" muted autoplay loop playsinline preload="metadata"></video>
-    <video src="https://litter.catbox.moe/lvbzpz.mp4" muted autoplay loop playsinline preload="metadata"></video>
-    <video src="https://litter.catbox.moe/vazu9y.mp4" muted autoplay loop playsinline preload="metadata"></video>
-  </div>
-  <div class="shade"></div>
   <div class="wrap">
   <header class="top">
-    <img class="brand" src="assets/collab.jpg" width="200" height="89" alt="KHUTTZZ x OutKasts" onerror="this.remove()" />
+    <a class="brand-lockup" href="index.html" aria-label="KHUTTZZ featuring OutKasts">
+      <img class="brand-k" src="assets/logo.png" alt="KHUTTZZ" onerror="this.remove()" />
+      <span class="feat"><small>featuring</small><b>×</b></span>
+      <img class="brand-o" src="assets/outkasts.png" alt="OutKasts Barbershop" onerror="this.remove()" />
+    </a>
     <nav>
       <a href="#menu">Menu</a>
       <a href="#reviews">Reviews</a>
@@ -163,7 +168,13 @@
     </nav>
   </header>
 
-  <section class="hero" aria-hidden="true"></section>
+  <section class="shots" aria-label="Recent cuts">
+    <img class="is-on" src="assets/work-1.jpg" alt="" />
+    <img src="assets/work-2.jpg" alt="" />
+    <img src="assets/work-3.jpg" alt="" />
+    <img src="assets/work-4.jpg" alt="" />
+    <img src="assets/work-5.jpg" alt="" />
+  </section>
   <section class="bar">
     <strong>Open 7 days a week</strong>
     <span>505 Highway 7 Unit B60 · Thornhill</span>
@@ -254,9 +265,19 @@
 
   </div>
   <script>
-    document.querySelectorAll("img,video").forEach(function (el) {
+    document.querySelectorAll("img").forEach(function (el) {
       el.addEventListener("error", function () { el.remove(); });
     });
+    (function () {
+      var shots = document.querySelectorAll(".shots img");
+      if (!shots.length) return;
+      var i = 0;
+      setInterval(function () {
+        shots[i].classList.remove("is-on");
+        i = (i + 1) % shots.length;
+        shots[i].classList.add("is-on");
+      }, 2800);
+    })();
   </script>
 </body>
 </html>
