@@ -23,12 +23,21 @@
 
     .wall {
       position:fixed; inset:0; z-index:0;
-      display:grid; grid-template-columns:1fr 1fr;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      grid-template-rows:repeat(4,1fr);
+      width:100%; height:100vh; height:100dvh;
     }
-    .wall video { height:25vh; object-fit:cover; }
+    .wall video {
+      width:100%; height:100%;
+      object-fit:cover;
+      pointer-events:none;
+    }
     @media (min-width:700px) {
-      .wall { grid-template-columns:repeat(4,1fr); }
-      .wall video { height:50vh; }
+      .wall {
+        grid-template-columns:repeat(4,1fr);
+        grid-template-rows:1fr 1fr;
+      }
     }
     .shade {
       position:fixed; inset:0; z-index:1; pointer-events:none;
@@ -160,14 +169,14 @@
 </head>
 <body>
   <div class="wall" aria-hidden="true">
-    <video src="https://litter.catbox.moe/cfo149.mp4" muted autoplay loop playsinline preload="metadata"></video>
-    <video src="https://litter.catbox.moe/54lyvd.mp4" muted autoplay loop playsinline preload="metadata"></video>
-    <video src="https://litter.catbox.moe/b83do5.mp4" muted autoplay loop playsinline preload="metadata"></video>
-    <video src="https://litter.catbox.moe/eoz955.mp4" muted autoplay loop playsinline preload="metadata"></video>
-    <video src="https://litter.catbox.moe/suy4uv.mp4" muted autoplay loop playsinline preload="metadata"></video>
-    <video src="https://litter.catbox.moe/kaxnzs.mp4" muted autoplay loop playsinline preload="metadata"></video>
-    <video src="https://litter.catbox.moe/lvbzpz.mp4" muted autoplay loop playsinline preload="metadata"></video>
-    <video src="https://litter.catbox.moe/vazu9y.mp4" muted autoplay loop playsinline preload="metadata"></video>
+    <video src="assets/reels/1.mp4" muted autoplay loop playsinline webkit-playsinline preload="auto"></video>
+    <video src="assets/reels/2.mp4" muted autoplay loop playsinline webkit-playsinline preload="auto"></video>
+    <video src="assets/reels/3.mp4" muted autoplay loop playsinline webkit-playsinline preload="auto"></video>
+    <video src="assets/reels/4.mp4" muted autoplay loop playsinline webkit-playsinline preload="auto"></video>
+    <video src="assets/reels/5.mp4" muted autoplay loop playsinline webkit-playsinline preload="auto"></video>
+    <video src="assets/reels/6.mp4" muted autoplay loop playsinline webkit-playsinline preload="auto"></video>
+    <video src="assets/reels/7.mp4" muted autoplay loop playsinline webkit-playsinline preload="auto"></video>
+    <video src="assets/reels/8.mp4" muted autoplay loop playsinline webkit-playsinline preload="auto"></video>
   </div>
   <div class="shade"></div>
   <div class="wrap">
@@ -275,9 +284,24 @@
 
   </div>
   <script>
-    document.querySelectorAll("img,video").forEach(function (el) {
-      el.addEventListener("error", function () { el.remove(); });
-    });
+    (function () {
+      function playWall() {
+        document.querySelectorAll(".wall video").forEach(function (v) {
+          v.muted = true;
+          v.playsInline = true;
+          var p = v.play();
+          if (p && p.catch) p.catch(function () {});
+        });
+      }
+      playWall();
+      document.addEventListener("DOMContentLoaded", playWall);
+      window.addEventListener("load", playWall);
+      document.addEventListener("touchstart", playWall, { once: true });
+      document.addEventListener("click", playWall, { once: true });
+      document.querySelectorAll("img").forEach(function (el) {
+        el.addEventListener("error", function () { el.remove(); });
+      });
+    })();
   </script>
 </body>
 </html>
